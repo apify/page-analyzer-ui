@@ -1,0 +1,18 @@
+.Header {
+    background-color: #001d5d;
+    border-bottom: darken(#001d5d, 10%);
+    justify-content: flex-start;
+    align-items: center;
+
+    svg {
+        margin-top: 15px;
+        height: 100%;
+    }
+
+    h1 {
+        display: inline-block;
+        color: white;
+        font-size: 22px;
+        top: -0.35em;
+    }
+}

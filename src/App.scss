@@ -1,0 +1,15 @@
+@import 'components/Header.scss';
+@import 'components/AnalysisResults.scss';
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+
+.App {
+    padding-top: 81px;
+
+    section {
+        padding: 50px 0;
+    }
+
+    button {
+        cursor: pointer;
+    }
+}

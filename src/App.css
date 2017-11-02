@@ -1,0 +1,21 @@
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+.Header {
+  background-color: #001d5d;
+  border-bottom: #000d2a;
+  justify-content: flex-start;
+  align-items: center; }
+  .Header svg {
+    margin-top: 15px;
+    height: 100%; }
+  .Header h1 {
+    display: inline-block;
+    color: white;
+    font-size: 22px;
+    top: -0.35em; }
+
+.App {
+  padding-top: 81px; }
+  .App section {
+    padding: 50px 0; }
+  .App button {
+    cursor: pointer; }
