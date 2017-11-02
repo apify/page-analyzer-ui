@@ -36,7 +36,10 @@ class App extends Component {
             response = await getOutput(keystore);
         } catch (error) {
             if (!error.status || error.status !== 404) throw error;
-            response = { analysisStarted: true, analysisEnded: false }
+            response = {
+                analysisStarted: true,
+                analysisEnded: false,
+            }
         }
         this.setState({ outputResponse: response });
         if (!response.analysisEnded) window.setTimeout(() => this.queryOutput(keystore), 100);

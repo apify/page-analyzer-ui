@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, NavbarBrand, NavItem } from 'reactstrap';
+import { Navbar, NavbarBrand } from 'reactstrap';
 
 const Header = () => (
     <Navbar fixed="top" className="Header">

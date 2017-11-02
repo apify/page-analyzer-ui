@@ -47,7 +47,7 @@ class InputForm extends React.Component {
         const { url, searchFor } = this.state;
         const { onSubmit } = this.props
         const transformedSearchFor = {};
-        searchFor.forEach(item => {
+        searchFor.filter(item => item.name && item.value).forEach(item => {
             transformedSearchFor[item.name] = item.value;
         })
         console.log({ url, searchFor: transformedSearchFor });

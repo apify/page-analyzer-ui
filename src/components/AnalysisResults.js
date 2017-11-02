@@ -1,13 +1,44 @@
 import React from 'react';
-import { Container, Row, Col, Nav, NavItem, NavLink, Badge } from 'reactstrap';
 import { compose, withState } from 'recompose';
 import FontAwesome from 'react-fontawesome';
+import AnalysisPreview from './AnalysisPreview';
 import AnalysisTab from './AnalysisTab';
 
 const AnalysisResults = ({ response, activeTab, setActiveTab }) => {
     if (!response) {
         return false
     }
+    const defaultValues = {
+        analysisStarted: false,
+        analysisEnded: false,
+        pageNavigated: null,
+        initialResponse: null,
+        windowPropertiesParsed: false,
+        windowProperties: {},
+        windowPropertiesFound: [],
+        allWindowProperties: {},
+        schemaOrgDataParsed: false,
+        schemaOrgData: {},
+        schemaOrgDataFound: [],
+        metaDataParsed: false,
+        metaData: {},
+        metaDataFound: [],
+        jsonLDDataParsed: false,
+        jsonLDData: {},
+        jsonLDDataFound: [],
+        html: '',
+        htmlParsed: false,
+        htmlFound: [],
+        xhrRequestsParsed: false,
+        xhrRequests: [],
+        xhrRequestsFound: [],
+        crawler: '',
+        scrappingFinished: null,
+        screenshot: '',
+        error: null,
+        pageError: null,
+    }
+    const data = Object.assign({}, defaultValues, response)
     const {
         windowPropertiesParsed,
         windowProperties,
@@ -22,146 +53,116 @@ const AnalysisResults = ({ response, activeTab, setActiveTab }) => {
         jsonLDDataParsed,
         jsonLDData,
         jsonLDDataFound,
+        html,
         htmlParsed,
         htmlFound,
+        xhrRequestsParsed,
+        xhrRequests,
+        xhrRequestsFound,
         // crawler,
         analysisEnded
-    } = response;
+    } = data;
 
     return (
         <div className="AnalysisResults">
-            <Container>
-                <Row>
-                    <Col>
-                        <Nav tabs>
-                            {!!windowPropertiesParsed &&
-                                <NavItem>
-                                    <NavLink
-                                        className={activeTab === 'window' ? 'active' : ''}
-                                        onClick={() => setActiveTab('window')}
-                                    >
-                                        Window{' '}
-                                        <Badge
-                                            color={windowPropertiesFound.length ? 'success' : 'secondary'}
-                                        >
-                                            {windowPropertiesFound.length}
-                                        </Badge>
-                                    </NavLink>
-                                </NavItem>
-                            }
-                            {!!schemaOrgDataParsed &&
-                                <NavItem>
-                                    <NavLink
-                                        className={activeTab === 'schema' ? 'active' : ''}
-                                        onClick={() => setActiveTab('schema')}
-                                    >
-                                        Schema.org{' '}
-                                        <Badge
-                                            color={schemaOrgDataFound.length ? 'success' : 'secondary'}
-                                        >
-                                            {schemaOrgDataFound.length}
-                                        </Badge>
-                                    </NavLink>
-                                </NavItem>
-                            }
-                            {!!metaDataParsed &&
-                                <NavItem>
-                                    <NavLink
-                                        className={activeTab === 'meta' ? 'active' : ''}
-                                        onClick={() => setActiveTab('meta')}
-                                    >
-                                        Metatags{' '}
-                                        <Badge
-                                            color={metaDataFound.length ? 'success' : 'secondary'}
-                                        >
-                                            {metaDataFound.length}
-                                        </Badge>
-                                    </NavLink>
-                                </NavItem>
-                            }
-                            {!!jsonLDDataParsed &&
-                                <NavItem>
-                                    <NavLink
-                                        className={activeTab === 'json-ld' ? 'active' : ''}
-                                        onClick={() => setActiveTab('json-ld')}
-                                    >
-                                        JSON-LD{' '}
-                                        <Badge
-                                            color={jsonLDDataFound.length ? 'success' : 'secondary'}
-                                        >
-                                            {jsonLDDataFound.length}
-                                        </Badge>
-                                    </NavLink>
-                                </NavItem>
-                            }
-                            {!!htmlParsed &&
-                                <NavItem>
-                                    <NavLink
-                                        className={activeTab === 'html' ? 'active' : ''}
-                                        onClick={() => setActiveTab('html')}
-                                    >
-                                        HTML{' '}
-                                        <Badge
-                                            color={htmlFound.length ? 'success' : 'secondary'}
-                                        >
-                                            {htmlFound.length}
-                                        </Badge>
-                                    </NavLink>
-                                </NavItem>
-                            }
-                            {!analysisEnded &&
-                                <NavItem>
-                                    <NavLink disabled>
-                                        <FontAwesome name="spinner" spin />
-                                    </NavLink>
-                                </NavItem>
-                            }
-                        </Nav>
-                        <AnalysisTab
-                            heading="Window"
-                            parsed={windowPropertiesParsed}
-                            data={windowProperties}
-                            additionalData={allWindowProperties}
-                            searchResults={windowPropertiesFound}
-                            isActive={activeTab === 'window'}
-                        />
-                        <AnalysisTab
-                            heading="Schema.org"
-                            parsed={schemaOrgDataParsed}
-                            data={schemaOrgData}
-                            searchResults={schemaOrgDataFound}
-                            isActive={activeTab === 'schema'}
-                        />
-                        <AnalysisTab
-                            heading="Meta"
-                            parsed={metaDataParsed}
-                            data={metaData}
-                            searchResults={metaDataFound}
-                            isActive={activeTab === 'meta'}
-                        />
-                        <AnalysisTab
-                            heading="JSON-LD"
-                            parsed={jsonLDDataParsed}
-                            data={jsonLDData}
-                            searchResults={jsonLDDataFound}
-                            isActive={activeTab === 'json-ld'}
-                        />
-                        <AnalysisTab
-                            heading="HTML"
-                            parsed={htmlParsed}
-                            searchResults={htmlFound}
-                            isActive={activeTab === 'html'}
-                        />
-                        {/* !!crawler && <pre>{crawler}</pre> */}
-                    </Col>
-                </Row>
-            </Container>
+            {!analysisEnded &&
+                <div className="loader">
+                    <FontAwesome name="spinner" size="4x" spin />
+                </div>
+            }
+            <div className="previews">
+                <AnalysisPreview
+                    heading="Window"
+                    foundItems={windowPropertiesFound.length}
+                    done={windowPropertiesParsed}
+                    onClick={() => setActiveTab('window')}
+                />
+                <AnalysisPreview
+                    heading="Schema.org"
+                    foundItems={schemaOrgDataFound.length}
+                    done={schemaOrgDataParsed}
+                    onClick={() => setActiveTab('schema')}
+                />
+                <AnalysisPreview
+                    heading="Metadata"
+                    foundItems={metaDataFound.length}
+                    done={metaDataParsed}
+                    onClick={() => setActiveTab('meta')}
+                />
+                <AnalysisPreview
+                    heading="JSON-LD"
+                    foundItems={jsonLDDataFound.length}
+                    done={jsonLDDataParsed}
+                    onClick={() => setActiveTab('json-ld')}
+                />
+                <AnalysisPreview
+                    heading="XHR"
+                    foundItems={xhrRequestsFound.length}
+                    done={xhrRequestsParsed}
+                    onClick={() => setActiveTab('xhr')}
+                />
+                <AnalysisPreview
+                    heading="HTML"
+                    foundItems={htmlFound.length}
+                    done={htmlParsed}
+                    onClick={() => setActiveTab('html')}
+                />
+            </div>
+            <AnalysisTab
+                heading="Window"
+                parsed={windowPropertiesParsed}
+                data={windowProperties}
+                additionalData={allWindowProperties}
+                searchResults={windowPropertiesFound}
+                isActive={activeTab === 'window'}
+                clear={() => setActiveTab('')}
+            />
+            <AnalysisTab
+                heading="Schema.org"
+                parsed={schemaOrgDataParsed}
+                data={schemaOrgData}
+                searchResults={schemaOrgDataFound}
+                isActive={activeTab === 'schema'}
+                clear={() => setActiveTab('')}
+            />
+            <AnalysisTab
+                heading="Meta"
+                parsed={metaDataParsed}
+                data={metaData}
+                searchResults={metaDataFound}
+                isActive={activeTab === 'meta'}
+                clear={() => setActiveTab('')}
+            />
+            <AnalysisTab
+                heading="JSON-LD"
+                parsed={jsonLDDataParsed}
+                data={jsonLDData}
+                searchResults={jsonLDDataFound}
+                isActive={activeTab === 'json-ld'}
+                clear={() => setActiveTab('')}
+            />
+            <AnalysisTab
+                heading="XHR"
+                parsed={xhrRequestsParsed}
+                searchResults={xhrRequestsFound}
+                data={xhrRequests}
+                isActive={activeTab === 'xhr'}
+                clear={() => setActiveTab('')}
+            />
+            <AnalysisTab
+                heading="HTML"
+                parsed={htmlParsed}
+                htmlData={html}
+                searchResults={htmlFound}
+                isActive={activeTab === 'html'}
+                clear={() => setActiveTab('')}
+            />
         </div>
     )
 }
 
 const enhance = compose(
-    withState('activeTab', 'setActiveTab', 'window')
+    withState('activeTab', 'setActiveTab', '')
 );
 
 export default enhance(AnalysisResults)
