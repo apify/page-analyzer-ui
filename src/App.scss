@@ -22,6 +22,17 @@ body {
     }
 }
 
+h3 {
+    margin-top: 2rem;
+}
+
+.query {
+    margin-top: 3rem;
+    h3 {
+        margin-top: 0;
+    }
+}
+
 .analysis-tab {
     max-width: 90%;
 }

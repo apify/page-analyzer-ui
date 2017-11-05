@@ -1,10 +1,10 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input, FormText, Container, Row, Col, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormText, Container, Row, Col, Button, Jumbotron } from 'reactstrap';
 
 function FieldGroup({ id, label, help, ...props }) {
   return (
     <FormGroup>
-      <Label>{label}</Label>
+      {!!label && <Label>{label}</Label>}
       <Input {...props} />
       {help && <FormText>{help}</FormText>}
     </FormGroup>
@@ -60,57 +60,67 @@ class InputForm extends React.Component {
                 <Container>
                     <Row>
                         <Col>
+                            <h3>Website</h3>
                             <FieldGroup
                               id="url"
                               type="text"
-                              label="Page URL"
-                              placeholder="Enter url"
+                              label="Website's url"
+                              placeholder="Enter url of the page you wish to analyze"
                               value={url}
                               onChange={this.onURLChange}
                             />
                         </Col>
                     </Row>
-                    {searchFor.map((item, index) => (
-                        <Row key={`item_${index}`}>
+                </Container>
+
+                <Jumbotron className="query">
+                    <Container>
+                        <h3>Query</h3>
+                        {searchFor.map((item, index) => (
+                            <Row key={`item_${index}`}>
+                                <Col>
+                                    <FieldGroup
+                                      id={`item_${index}_name`}
+                                      type="text"
+                                      label={index === 0 ? "Query item's label" : ''}
+                                      placeholder="Enter label for the value you are looking for"
+                                      value={item.name}
+                                      onChange={(event) => this.onItemNameChange(index, event)}
+                                    />
+                                </Col>
+                                <Col>
+                                    <FieldGroup
+                                      id={`item_${index}_value`}
+                                      type="text"
+                                      label={index === 0 ? "Query item's value" : ''}
+                                      placeholder="Enter the value you are looking for."
+                                      value={item.value}
+                                      onChange={(event) => this.onItemValueChange(index, event)}
+                                    />
+                                </Col>
+                            </Row>
+                        ))}
+                        <Row>
                             <Col>
-                                <FieldGroup
-                                  id={`item_${index}_name`}
-                                  type="text"
-                                  label="Item name"
-                                  placeholder="Enter name of the item"
-                                  value={item.name}
-                                  onChange={(event) => this.onItemNameChange(index, event)}
-                                />
-                            </Col>
-                            <Col>
-                                <FieldGroup
-                                  id={`item_${index}_value`}
-                                  type="text"
-                                  label="Item value"
-                                  placeholder="Enter value of the item"
-                                  value={item.value}
-                                  onChange={(event) => this.onItemValueChange(index, event)}
-                                />
+                                <Button
+                                    type="button"
+                                    onClick={this.addItem}
+                                    color="secondary"
+                                >
+                                    + Add another query
+                                </Button>
                             </Col>
                         </Row>
-                    ))}
-                    <Row>
-                        <Col>
-                            <Button
-                                type="button"
-                                onClick={this.addItem}
-                                color="secondary"
-                            >
-                                +
-                            </Button>
-                        </Col>
-                    </Row>
+                    </Container>
+                </Jumbotron>
+                <Container>
                     <Row>
                         <Col className="text-center">
                             <Button
                                 type="button"
                                 onClick={this.submit}
                                 color="primary"
+                                size="lg"
                             >
                                 Analyze
                             </Button>

@@ -1,6 +1,7 @@
 .AnalysisResults {
+    text-align: center;
+
     .loader {
-        text-align: center;
         padding-bottom: 1rem;
     }
     .previews {
@@ -21,11 +22,12 @@
         text-align: center;
         background-color: #fffeea;
         cursor: pointer;
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 
-        transition: background-color 300ms ease-in-out, opacity 300ms ease-in-out;
+        transition: background-color 300ms ease-in-out, opacity 300ms ease-in-out, box-shadow 100ms ease-in-out;
 
         &:hover {
-            box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
         }
 
         &.done {
@@ -36,17 +38,32 @@
             background-color: #6ce86a;
         }
 
-        &.done:not(.found) {
-            opacity: 0.8;
+        &.empty {
+            opacity: 0.2;
+            cursor: default;
         }
 
         .name {
             font-size: 1.2rem;
             font-weight: bold;
         }
+        .data-results {
+            font-size: 0.9rem;
+        }
         .found-results {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             font-size: 1.2rem;
+        }
+    }
+
+    .screenshot-wrapper {
+        text-align: center;
+        padding-top: 2rem;
+        img {
+            max-width: 90%;
+            border: 1px solid gray;
+            border-radius: 2px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
     }
 }
@@ -68,7 +85,7 @@
 @media screen and (min-width: 992px) {
     .AnalysisResults {
         .analysis-preview {
-            max-width: 20%;
+            max-width: 25%;
         }
     }
 }

@@ -1,7 +1,7 @@
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 .Header {
-  background-color: #001d5d;
-  border-bottom: #000d2a;
+  background-color: #fff;
+  box-shadow: 0 1px 0 0 rgba(159, 165, 169, 0.1);
   justify-content: flex-start;
   align-items: bottom; }
   .Header svg {
@@ -9,46 +9,57 @@
     height: 100%; }
   .Header h1 {
     display: inline-block;
-    color: white;
+    color: black;
     font-size: 2rem;
     transform: translate(0, 0.6rem); }
 
-.AnalysisResults .loader {
-  text-align: center;
-  padding-bottom: 1rem; }
-
-.AnalysisResults .previews {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  flex-wrap: wrap; }
-
-.AnalysisResults .analysis-preview {
-  border-radius: 2px;
-  box-sizing: border-box;
-  padding: 3rem 2rem;
-  margin: 0.5rem;
-  flex: 0 1 300px;
-  border: 1px solid gray;
-  text-align: center;
-  background-color: #fffeea;
-  cursor: pointer;
-  transition: background-color 300ms ease-in-out, opacity 300ms ease-in-out; }
-  .AnalysisResults .analysis-preview:hover {
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
-  .AnalysisResults .analysis-preview.done {
-    background-color: #ededed; }
-  .AnalysisResults .analysis-preview.found {
-    background-color: #6ce86a; }
-  .AnalysisResults .analysis-preview.done:not(.found) {
-    opacity: 0.8; }
-  .AnalysisResults .analysis-preview .name {
-    font-size: 1.2rem;
-    font-weight: bold; }
-  .AnalysisResults .analysis-preview .found-results {
-    margin-top: 1rem;
-    font-size: 1.2rem; }
+.AnalysisResults {
+  text-align: center; }
+  .AnalysisResults .loader {
+    padding-bottom: 1rem; }
+  .AnalysisResults .previews {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap; }
+  .AnalysisResults .analysis-preview {
+    border-radius: 2px;
+    box-sizing: border-box;
+    padding: 3rem 2rem;
+    margin: 0.5rem;
+    flex: 0 1 300px;
+    border: 1px solid gray;
+    text-align: center;
+    background-color: #fffeea;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color 300ms ease-in-out, opacity 300ms ease-in-out, box-shadow 100ms ease-in-out; }
+    .AnalysisResults .analysis-preview:hover {
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); }
+    .AnalysisResults .analysis-preview.done {
+      background-color: #ededed; }
+    .AnalysisResults .analysis-preview.found {
+      background-color: #6ce86a; }
+    .AnalysisResults .analysis-preview.empty {
+      opacity: 0.2;
+      cursor: default; }
+    .AnalysisResults .analysis-preview .name {
+      font-size: 1.2rem;
+      font-weight: bold; }
+    .AnalysisResults .analysis-preview .data-results {
+      font-size: 0.9rem; }
+    .AnalysisResults .analysis-preview .found-results {
+      margin-top: 1.5rem;
+      font-size: 1.2rem; }
+  .AnalysisResults .screenshot-wrapper {
+    text-align: center;
+    padding-top: 2rem; }
+    .AnalysisResults .screenshot-wrapper img {
+      max-width: 90%;
+      border: 1px solid gray;
+      border-radius: 2px;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); }
 
 @media screen and (min-width: 480px) {
   .AnalysisResults .analysis-preview {
@@ -60,7 +71,7 @@
 
 @media screen and (min-width: 992px) {
   .AnalysisResults .analysis-preview {
-    max-width: 20%; } }
+    max-width: 25%; } }
 
 @media screen and (min-width: 1200px) {
   .AnalysisResults .analysis-preview {
@@ -75,6 +86,14 @@ html {
     padding: 2rem 0; }
   .App button {
     cursor: pointer; }
+
+h3 {
+  margin-top: 2rem; }
+
+.query {
+  margin-top: 3rem; }
+  .query h3 {
+    margin-top: 0; }
 
 .analysis-tab {
   max-width: 90%; }

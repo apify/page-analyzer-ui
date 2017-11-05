@@ -60,7 +60,8 @@ const AnalysisResults = ({ response, activeTab, setActiveTab }) => {
         xhrRequests,
         xhrRequestsFound,
         // crawler,
-        analysisEnded
+        analysisEnded,
+        screenshot,
     } = data;
 
     return (
@@ -70,10 +71,16 @@ const AnalysisResults = ({ response, activeTab, setActiveTab }) => {
                     <FontAwesome name="spinner" size="4x" spin />
                 </div>
             }
+            {!!analysisEnded &&
+                <h2>Analysis results</h2>
+            }
             <div className="previews">
                 <AnalysisPreview
                     heading="Window"
                     foundItems={windowPropertiesFound.length}
+                    data={allWindowProperties}
+                    dataLabel="Variables found: "
+                    queryLabel="Query results: "
                     done={windowPropertiesParsed}
                     onClick={() => setActiveTab('window')}
                 />
@@ -82,30 +89,44 @@ const AnalysisResults = ({ response, activeTab, setActiveTab }) => {
                     foundItems={schemaOrgDataFound.length}
                     done={schemaOrgDataParsed}
                     onClick={() => setActiveTab('schema')}
+                    data={schemaOrgData}
+                    dataLabel="Top level scopes found: "
+                    queryLabel="Query results: "
                 />
                 <AnalysisPreview
                     heading="Metadata"
                     foundItems={metaDataFound.length}
                     done={metaDataParsed}
                     onClick={() => setActiveTab('meta')}
+                    data={metaData}
+                    dataLabel="Metatags found: "
+                    queryLabel="Query results: "
                 />
                 <AnalysisPreview
                     heading="JSON-LD"
                     foundItems={jsonLDDataFound.length}
                     done={jsonLDDataParsed}
                     onClick={() => setActiveTab('json-ld')}
+                    data={jsonLDData}
+                    dataLabel="JSON-LD tags found: "
+                    queryLabel="Query results: "
                 />
                 <AnalysisPreview
                     heading="XHR"
                     foundItems={xhrRequestsFound.length}
                     done={xhrRequestsParsed}
                     onClick={() => setActiveTab('xhr')}
+                    data={xhrRequests}
+                    dataLabel="Data XHR requests found: "
+                    queryLabel="Query results: "
                 />
                 <AnalysisPreview
                     heading="HTML"
                     foundItems={htmlFound.length}
                     done={htmlParsed}
                     onClick={() => setActiveTab('html')}
+                    data={null}
+                    queryLabel="Selectors found: "
                 />
             </div>
             <AnalysisTab
@@ -157,6 +178,12 @@ const AnalysisResults = ({ response, activeTab, setActiveTab }) => {
                 isActive={activeTab === 'html'}
                 clear={() => setActiveTab('')}
             />
+            {!!screenshot &&
+                <div className="screenshot-wrapper">
+                    <h2>Page screenshot</h2>
+                    <img alt="Page screenshot" src={`data:image/png;base64,${screenshot}`} />
+                </div>
+            }
         </div>
     )
 }
