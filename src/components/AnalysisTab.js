@@ -2,10 +2,9 @@ import React from 'react';
 import ReactJson from 'react-json-view';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
-const AnalysisTab = ({ isActive, parsed, data, htmlData, searchResults, additionalData, clear, heading }) => {
+const AnalysisTab = ({ isActive, parsed, data, searchResults, additionalData, clear, heading }) => {
     if (!parsed) return false
 
-    const hasHTML = !!htmlData && htmlData !== ''
     const hasData = !!data && data !== {} && data !== []
     const hasAdditionalData = !!additionalData && additionalData !== {} && additionalData !== []
 

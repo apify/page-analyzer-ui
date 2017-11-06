@@ -1,5 +1,16 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input, FormText, Container, Row, Col, Button, Jumbotron } from 'reactstrap';
+import {
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    FormText,
+    Container,
+    Row, Col,
+    Button,
+    Jumbotron,
+    Alert,
+} from 'reactstrap';
 
 function FieldGroup({ id, label, help, ...props }) {
   return (
@@ -19,6 +30,7 @@ class InputForm extends React.Component {
             searchFor: [
                 { name: '', value: '' },
             ],
+            errorMessage: '',
         };
         this.onURLChange = this.onURLChange.bind(this);
         this.onItemNameChange = this.onItemNameChange.bind(this);
@@ -47,14 +59,20 @@ class InputForm extends React.Component {
         const { url, searchFor } = this.state;
         const { onSubmit } = this.props
         const transformedSearchFor = {};
+        const unfinishedItems = searchFor.filter(item => (!item.name && item.value) || (item.name && !item.value))
+        if (unfinishedItems.length) {
+            this.setState({ errorMessage: 'Please specify both label and value for all query items.'});
+            return;
+        } else {
+            this.setState({ errorMessage: ''})
+        }
         searchFor.filter(item => item.name && item.value).forEach(item => {
             transformedSearchFor[item.name] = item.value;
         })
-        console.log({ url, searchFor: transformedSearchFor });
         onSubmit({ url, searchFor: transformedSearchFor });
     }
     render() {
-        const { url, searchFor } = this.state;
+        const { url, searchFor, errorMessage } = this.state;
         return (
             <Form className="InputForm">
                 <Container>
@@ -76,6 +94,7 @@ class InputForm extends React.Component {
                 <Jumbotron className="query">
                     <Container>
                         <h3>Query</h3>
+                        {!!errorMessage && <Alert color="danger">{errorMessage}</Alert>}
                         {searchFor.map((item, index) => (
                             <Row key={`item_${index}`}>
                                 <Col>
@@ -121,6 +140,7 @@ class InputForm extends React.Component {
                                 onClick={this.submit}
                                 color="primary"
                                 size="lg"
+                                disabled={!url}
                             >
                                 Analyze
                             </Button>
