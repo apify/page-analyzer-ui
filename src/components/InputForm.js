@@ -11,6 +11,8 @@ import {
     Jumbotron,
     Alert,
 } from 'reactstrap';
+import FontAwesome from 'react-fontawesome';
+import isURL from 'validator/lib/isURL';
 
 function FieldGroup({ id, label, help, ...props }) {
   return (
@@ -26,127 +28,119 @@ class InputForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: '',
-            searchFor: [
-                { name: '', value: '' },
-            ],
-            errorMessage: '',
+            url: 'https://www.yelp.com/biz/cuisine-of-nepal-san-francisco',
+            searchFor: ['Cuisine of Nepal', '3486 Mission St'],
+            urlErrorMessage: '',
         };
         this.onURLChange = this.onURLChange.bind(this);
-        this.onItemNameChange = this.onItemNameChange.bind(this);
         this.onItemValueChange = this.onItemValueChange.bind(this);
         this.addItem = this.addItem.bind(this);
         this.submit = this.submit.bind(this);
     }
+
     onURLChange(event) {
         this.setState({ url: event.target.value });
     }
-    onItemNameChange(index, event) {
-        const newItems = [...this.state.searchFor];
-        newItems[index].name = event.target.value;
-        this.setState({ searchFor: newItems });
-    }
+
     onItemValueChange(index, event) {
         const newItems = [...this.state.searchFor];
-        newItems[index].value = event.target.value;
+        newItems[index] = event.target.value;
         this.setState({ searchFor: newItems });
     }
+
     addItem() {
-        const newItems = [...this.state.searchFor, { name: '', value: '' }];
+        const newItems = [...this.state.searchFor, ''];
         this.setState({ searchFor: newItems });
     }
+
     submit() {
         const { url, searchFor } = this.state;
         const { onSubmit } = this.props
-        const transformedSearchFor = {};
-        const unfinishedItems = searchFor.filter(item => (!item.name && item.value) || (item.name && !item.value))
-        if (unfinishedItems.length) {
-            this.setState({ errorMessage: 'Please specify both label and value for all query items.'});
+        const transformedSearchFor = searchFor.filter(item => !!item)
+        let passedValidation = true;
+
+        if (!isURL(url)) {
+            this.setState({ urlErrorMessage: 'Please provide valid url address.'});
             return;
         } else {
-            this.setState({ errorMessage: ''})
+            this.setState({ urlErrorMessage: ''})
         }
+
         searchFor.filter(item => item.name && item.value).forEach(item => {
             transformedSearchFor[item.name] = item.value;
         })
+
         onSubmit({ url, searchFor: transformedSearchFor });
     }
     render() {
-        const { url, searchFor, errorMessage } = this.state;
+        const { url, searchFor, urlErrorMessage } = this.state;
         return (
             <Form className="InputForm">
-                <Container>
-                    <Row>
-                        <Col>
-                            <h3>Website</h3>
-                            <FieldGroup
-                              id="url"
-                              type="text"
-                              label="Website's url"
-                              placeholder="Enter url of the page you wish to analyze"
-                              value={url}
-                              onChange={this.onURLChange}
-                            />
-                        </Col>
-                    </Row>
-                </Container>
+                <Jumbotron className="website">
+                    <div className="wrapper">
+                        <h3>Website</h3>
+                        {!!urlErrorMessage && <Alert color="danger">{urlErrorMessage}</Alert>}
+                        <FieldGroup
+                          id="url"
+                          type="text"
+                          placeholder="Enter URL of the website you want to analyze."
+                          value={url}
+                          onChange={this.onURLChange}
+                        />
+                    </div>
+                </Jumbotron>
 
                 <Jumbotron className="query">
-                    <Container>
-                        <h3>Query</h3>
-                        {!!errorMessage && <Alert color="danger">{errorMessage}</Alert>}
+                    <div className="wrapper">
+                        <h3>Data to look for <small>(optional)</small></h3>
                         {searchFor.map((item, index) => (
-                            <Row key={`item_${index}`}>
-                                <Col>
-                                    <FieldGroup
-                                      id={`item_${index}_name`}
-                                      type="text"
-                                      label={index === 0 ? "Query item's label" : ''}
-                                      placeholder="Enter label for the value you are looking for"
-                                      value={item.name}
-                                      onChange={(event) => this.onItemNameChange(index, event)}
-                                    />
-                                </Col>
-                                <Col>
-                                    <FieldGroup
-                                      id={`item_${index}_value`}
-                                      type="text"
-                                      label={index === 0 ? "Query item's value" : ''}
-                                      placeholder="Enter the value you are looking for."
-                                      value={item.value}
-                                      onChange={(event) => this.onItemValueChange(index, event)}
-                                    />
-                                </Col>
-                            </Row>
+                            <div className="item-row" key={`item_${index}`}>
+                                {searchFor.length > 1 &&
+                                    <div className="item-row-remove">
+                                        <FontAwesome
+                                            name="trash-o"
+                                            onClick={() => {
+                                                const newSearchFor = [...searchFor];
+                                                newSearchFor.splice(index, 1);
+                                                this.setState({
+                                                    searchFor: newSearchFor,
+                                                });
+                                            }}
+                                        />
+                                    </div>
+                                }
+                                <FieldGroup
+                                  id={`item_${index}_value`}
+                                  type="text"
+                                  placeholder="What are you looking for?"
+                                  value={item}
+                                  onChange={(event) => this.onItemValueChange(index, event)}
+                                />
+                            </div>
                         ))}
-                        <Row>
-                            <Col>
-                                <Button
-                                    type="button"
-                                    onClick={this.addItem}
-                                    color="secondary"
-                                >
-                                    + Add another query
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Container>
+                        <Button
+                            type="button"
+                            onClick={this.addItem}
+                            color="secondary"
+                        >
+                            + Add another item
+                        </Button>
+                    </div>
                 </Jumbotron>
-                <Container>
-                    <Row>
-                        <Col className="text-center">
-                            <Button
-                                type="button"
-                                onClick={this.submit}
-                                color="primary"
-                                size="lg"
-                                disabled={!url}
-                            >
-                                Analyze
-                            </Button>
-                        </Col>
-                    </Row>
-                </Container>
+                <div className="actions">
+                    <div className="wrapper">
+                        <Button
+                            className="analyze"
+                            type="button"
+                            onClick={this.submit}
+                            color="primary"
+                            size="lg"
+                            disabled={!url}
+                        >
+                            Analyze
+                        </Button>
+                    </div>
+                </div>
             </Form>
         );
     }

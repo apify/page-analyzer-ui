@@ -42,7 +42,7 @@ class App extends Component {
             }
         }
         this.setState({ outputResponse: response });
-        if (!response.analysisEnded) window.setTimeout(() => this.queryOutput(keystore), 100);
+        if (!response.analysisEnded) window.setTimeout(() => this.queryOutput(keystore), 500);
     }
     render() {
         return (

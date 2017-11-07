@@ -1,69 +1,171 @@
-@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
-.Header {
-  background-color: #fff;
-  box-shadow: 0 1px 0 0 rgba(159, 165, 169, 0.1);
-  justify-content: flex-start;
-  align-items: bottom; }
-  .Header svg {
-    margin-top: 1rem;
-    height: 100%; }
-  .Header h1 {
-    display: inline-block;
-    color: black;
-    font-size: 2rem;
-    transform: translate(0, 0.6rem); }
+html {
+  font-size: 10px; }
 
-.AnalysisResults {
-  text-align: center; }
-  .AnalysisResults .loader {
-    padding-bottom: 1rem; }
-  .AnalysisResults .previews {
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Graphik", sans-serif;
+  box-sizing: border-box; }
+
+.App {
+  padding-top: 6rem; }
+  .App .Header {
+    background-color: #fff;
+    box-shadow: 0 1px 0 0 rgba(159, 164, 168, 0.1);
+    justify-content: flex-start;
+    align-items: bottom;
+    height: 6rem; }
+    .App .Header svg {
+      margin-top: 1rem;
+      height: 100%; }
+    .App .Header h1 {
+      display: inline-block;
+      color: #000;
+      font-size: 2rem;
+      transform: translateY(1rem); }
+  .App .col {
+    margin-bottom: 0; }
+  .App .InputForm input {
+    font-size: 1.6rem;
+    padding: 1.2rem 1.8rem;
+    line-height: 2.2rem;
+    background-color: white;
+    color: #111;
+    border: 1px solid lightgray; }
+  .App .InputForm .item-row {
+    position: relative;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: stretch;
-    flex-wrap: wrap; }
-  .AnalysisResults .analysis-preview {
+    margin-bottom: 1rem; }
+  .App .InputForm .item-row-label {
+    font-size: 1.2rem;
+    text-align: left; }
+  .App .InputForm .item-row-remove {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 2rem;
+    padding: 1rem;
+    z-index: 2;
+    cursor: pointer; }
+  .App .InputForm .form-group {
+    flex: 1;
+    margin-bottom: 0; }
+  .App .InputForm .actions .wrapper {
+    padding: 2rem 1rem;
+    max-width: 100rem;
+    margin: 0 auto; }
+  .App section {
+    margin-bottom: 2rem; }
+  .App label {
+    font-size: 1rem;
+    margin: 0; }
+  .App button {
+    font-weight: bold;
     border-radius: 2px;
-    box-sizing: border-box;
-    padding: 3rem 2rem;
-    margin: 0.5rem;
-    flex: 0 1 300px;
-    border: 1px solid gray;
-    text-align: center;
-    background-color: #fffeea;
-    cursor: pointer;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    transition: background-color 300ms ease-in-out, opacity 300ms ease-in-out, box-shadow 100ms ease-in-out; }
-    .AnalysisResults .analysis-preview:hover {
-      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); }
-    .AnalysisResults .analysis-preview.done {
-      background-color: #ededed; }
-    .AnalysisResults .analysis-preview.found {
-      background-color: #6ce86a; }
-    .AnalysisResults .analysis-preview.empty {
-      opacity: 0.2;
-      cursor: default; }
-    .AnalysisResults .analysis-preview .name {
-      font-size: 1.2rem;
-      font-weight: bold; }
-    .AnalysisResults .analysis-preview .data-results {
-      font-size: 0.9rem; }
-    .AnalysisResults .analysis-preview .found-results {
-      margin-top: 1.5rem;
-      font-size: 1.2rem; }
-  .AnalysisResults .screenshot-wrapper {
-    text-align: center;
-    padding-top: 2rem; }
-    .AnalysisResults .screenshot-wrapper img {
-      max-width: 90%;
-      border: 1px solid gray;
+    font-size: 1.6rem;
+    padding: 1.2rem 1.8rem;
+    cursor: pointer; }
+    .App button.btn-primary {
+      line-height: 3rem;
+      background: #00A7CE; }
+      .App button.btn-primary:hover:not([disabled]):not(.disabled) {
+        background: #009fc4; }
+      .App button.btn-primary:active:not([disabled]):not(.disabled) {
+        background: #007d9d; }
+    .App button.btn-secondary {
+      line-height: 3rem;
+      background: #C3C6C8; }
+      .App button.btn-secondary:hover:not([disabled]):not(.disabled) {
+        background: #b6b9bc; }
+      .App button.btn-secondary:active:not([disabled]):not(.disabled) {
+        background: #aeb2b4; }
+  .App .alert {
+    padding: .7rem 1.25rem 0.5rem;
+    font-size: 1rem; }
+  .App .jumbotron {
+    border-radius: 0;
+    padding: 0; }
+    .App .jumbotron .wrapper {
+      padding: 2rem 1rem;
+      max-width: 100rem;
+      margin: 0 auto; }
+    .App .jumbotron h3 {
+      margin-top: 0; }
+    .App .jumbotron.website {
+      background-color: #fff; }
+    .App .jumbotron.query {
+      background-color: #12181D;
+      margin-bottom: 3rem; }
+      .App .jumbotron.query h3 {
+        color: #EDE9E2; }
+  .App .analysis-tab {
+    max-width: 90%; }
+  .App .AnalysisResults {
+    text-align: center; }
+    .App .AnalysisResults .loader {
+      padding-bottom: 1rem; }
+    .App .AnalysisResults .previews {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap; }
+    .App .AnalysisResults .analysis-preview {
+      color: #050505;
       border-radius: 2px;
-      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); }
+      padding: 3rem 2rem;
+      margin: .5rem;
+      flex: 0 1 300px;
+      border: 1px solid gray;
+      text-align: center;
+      background-color: #fffeea;
+      cursor: pointer;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+      transition: background-color .3s ease-in-out, opacity .3s ease-in-out, box-shadow .1s ease-in-out; }
+      .App .AnalysisResults .analysis-preview:hover {
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); }
+      .App .AnalysisResults .analysis-preview.done {
+        background-color: #ededed;
+        cursor: pointer; }
+      .App .AnalysisResults .analysis-preview.found {
+        background-color: #6ce86a; }
+      .App .AnalysisResults .analysis-preview.empty {
+        opacity: .2;
+        cursor: default; }
+      .App .AnalysisResults .analysis-preview .name {
+        font-size: 1.2rem;
+        font-weight: 700; }
+      .App .AnalysisResults .analysis-preview .data-results {
+        font-size: .9rem; }
+      .App .AnalysisResults .analysis-preview .found-results {
+        margin-top: 1.5rem;
+        font-size: 1.2rem; }
+      .App .AnalysisResults .analysis-preview .screenshot-wrapper {
+        text-align: center;
+        padding-top: 2rem; }
+        .App .AnalysisResults .analysis-preview .screenshot-wrapper img {
+          max-width: 90%;
+          border: 1px solid gray;
+          border-radius: 2px;
+          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); }
 
-@media screen and (min-width: 480px) {
+.modal-dialog.analysis-tab {
+  max-width: 90%;
+  font-size: 1.1rem;
+  text-align: left; }
+  .modal-dialog.analysis-tab p {
+    margin-top: 1rem; }
+
+@media screen and (min-width: 425px) {
   .AnalysisResults .analysis-preview {
-    max-width: 50%; } }
+    max-width: 50%; }
+  .App h3 {
+    text-align: left; }
+  .App button {
+    width: 25rem; } }
 
 @media screen and (min-width: 640px) {
   .AnalysisResults .analysis-preview {
@@ -76,40 +178,3 @@
 @media screen and (min-width: 1200px) {
   .AnalysisResults .analysis-preview {
     max-width: 16%; } }
-
-html {
-  font-size: 10px; }
-
-.App {
-  padding-top: 81px; }
-  .App section {
-    padding: 2rem 0; }
-  .App button {
-    cursor: pointer; }
-
-h3 {
-  margin-top: 2rem; }
-
-.query {
-  margin-top: 3rem; }
-  .query h3 {
-    margin-top: 0; }
-
-.analysis-tab {
-  max-width: 90%; }
-
-@media screen and (min-width: 480px) {
-  html {
-    font-size: 12px; } }
-
-@media screen and (min-width: 640px) {
-  html {
-    font-size: 13px; } }
-
-@media screen and (min-width: 992px) {
-  html {
-    font-size: 14px; } }
-
-@media screen and (min-width: 1200px) {
-  html {
-    font-size: 16px; } }

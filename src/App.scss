@@ -1,62 +1,280 @@
-@import 'components/Header.scss';
-@import 'components/AnalysisResults.scss';
-@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
-
 html {
     font-size: 10px;
 }
 
 body {
-
+    margin: 0;
+    padding: 0;
+    font-family: "Graphik", sans-serif;
+    box-sizing: border-box;
 }
 
 .App {
-    padding-top: 81px;
+    padding-top: 6rem;
+
+    .Header {
+        background-color: #fff;
+        box-shadow: 0 1px 0 0 hsla(204, 5%, 64%, .1);
+        justify-content: flex-start;
+        align-items: bottom;
+        height: 6rem;
+
+        svg {
+            margin-top: 1rem;
+            height: 100%
+        }
+
+        h1 {
+            display: inline-block;
+            color: #000;
+            font-size: 2rem;
+            transform: translateY(1rem);
+        }
+    }
+
+    .col {
+        margin-bottom: 0;
+    }
+
+    .InputForm {
+        input {
+            font-size: 1.6rem;
+            padding: 1.2rem 1.8rem;
+            line-height: 2.2rem;
+            background-color: white;
+            color: #111;
+            border: 1px solid lightgray;
+        }
+
+        .item-row {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            margin-bottom: 1rem;
+        }
+
+        .item-row-label {
+            font-size: 1.2rem;
+            text-align: left;
+        }
+
+        .item-row-remove {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 2rem;
+            padding: 1rem;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .actions {
+            .wrapper {
+                padding: 2rem 1rem;
+                max-width: 100rem;
+                margin: 0 auto;
+            }
+        }
+    }
 
     section {
-        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+
+    label {
+        font-size: 1rem;
+        margin: 0;
     }
 
     button {
+        font-weight: bold;
+        border-radius: 2px;
+        font-size: 1.6rem;
+        padding: 1.2rem 1.8rem;
         cursor: pointer;
+
+        &.btn-primary {
+            line-height: 3rem;
+            background: #00A7CE;
+
+            &:hover:not([disabled]):not(.disabled) {
+                background: darken(#00A7CE, 2%);
+            }
+
+            &:active:not([disabled]):not(.disabled) {
+                background: #007d9d;
+            }
+        }
+
+        &.btn-secondary {
+            line-height: 3rem;
+            background: #C3C6C8;
+
+            &:hover:not([disabled]):not(.disabled) {
+                background: darken(#C3C6C8, 5%);
+            }
+            &:active:not([disabled]):not(.disabled) {
+                background: darken(#C3C6C8, 8%);
+            }
+        }
+    }
+
+    .alert {
+        padding: .7rem 1.25rem 0.5rem;
+        font-size: 1rem;
+    }
+
+    .jumbotron {
+        border-radius: 0;
+        padding: 0;
+
+        .wrapper {
+            padding: 2rem 1rem;
+            max-width: 100rem;
+            margin: 0 auto;
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+
+        &.website {
+            background-color: #fff;
+        }
+        &.query {
+            background-color: #12181D;
+            margin-bottom: 3rem;
+            h3 {
+                color: #EDE9E2;
+            }
+        }
+    }
+
+    .analysis-tab {
+        max-width: 90%;
+    }
+
+    .AnalysisResults {
+        text-align: center;
+
+        .loader {
+            padding-bottom: 1rem
+        }
+
+        .previews {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        .analysis-preview {
+            color: #050505;
+            border-radius: 2px;
+            padding: 3rem 2rem;
+            margin: .5rem;
+            flex: 0 1 300px;
+            border: 1px solid gray;
+            text-align: center;
+            background-color: #fffeea;
+            cursor: pointer;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, .1);
+            transition: background-color .3s ease-in-out, opacity .3s ease-in-out, box-shadow .1s ease-in-out;
+
+            &:hover {
+                box-shadow: 3px 3px 5px rgba(0, 0, 0, .2);
+            }
+
+            &.done {
+                background-color: #ededed;
+                cursor: pointer;
+            }
+
+            &.found {
+                background-color: #6ce86a;
+            }
+
+            &.empty {
+                opacity: .2;
+                cursor: default;
+            }
+
+            .name {
+                font-size: 1.2rem;
+                font-weight: 700;
+            }
+
+            .data-results {
+                font-size: .9rem;
+            }
+
+            .found-results {
+                margin-top: 1.5rem;
+                font-size: 1.2rem;
+            }
+
+            .screenshot-wrapper {
+                text-align: center;
+                padding-top: 2rem;
+
+                img {
+                    max-width: 90%;
+                    border: 1px solid gray;
+                    border-radius: 2px;
+                    box-shadow: 1px 1px 3px rgba(0, 0, 0, .1)
+                }
+            }
+        }
     }
 }
 
-h3 {
-    margin-top: 2rem;
-}
-
-.query {
-    margin-top: 3rem;
-    h3 {
-        margin-top: 0;
-    }
-}
-
-.analysis-tab {
+.modal-dialog.analysis-tab {
     max-width: 90%;
-}
+    font-size: 1.1rem;
+    text-align: left;
 
-@media screen and (min-width: 480px) {
-    html {
-        font-size: 12px;
+    p {
+        margin-top: 1rem;
     }
 }
 
-@media screen and (min-width: 640px) {
-    html {
-        font-size: 13px;
+@media screen and (min-width:425px) {
+    .AnalysisResults .analysis-preview {
+        max-width: 50%;
+    }
+
+    .App {
+        h3 {
+            text-align: left;
+        }
+        button {
+            width: 25rem;
+        }
     }
 }
 
-@media screen and (min-width: 992px) {
-    html {
-        font-size: 14px;
+@media screen and (min-width:640px) {
+    .AnalysisResults .analysis-preview {
+        max-width: 33%;
     }
 }
 
-@media screen and (min-width: 1200px) {
-    html {
-        font-size: 16px;
+@media screen and (min-width:992px) {
+    .AnalysisResults .analysis-preview {
+        max-width: 25%;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .AnalysisResults .analysis-preview {
+        max-width: 16%;
     }
 }
