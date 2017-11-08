@@ -24,7 +24,7 @@ const AnalysisTab = ({ isActive, parsed, data, searchResults, additionalData, cl
                   <div className="found-results">
                       <ReactJson
                           iconStyle="square"
-                          theme="ashes"
+                          theme="rjv-default"
                           name={null}
                           enableClipboard={false}
                           displayObjectSize={false}
@@ -48,7 +48,7 @@ const AnalysisTab = ({ isActive, parsed, data, searchResults, additionalData, cl
                       {hasData &&
                           <ReactJson
                               iconStyle="square"
-                              theme="ashes"
+                              theme="rjv-default"
                               name={null}
                               enableClipboard={false}
                               displayObjectSize={false}

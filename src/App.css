@@ -11,7 +11,7 @@ body {
   padding-top: 6rem; }
   .App .Header {
     background-color: #fff;
-    box-shadow: 0 1px 0 0 rgba(159, 164, 168, 0.1);
+    box-shadow: 0 2px 0 0 rgba(159, 164, 168, 0.1);
     justify-content: flex-start;
     align-items: bottom;
     height: 6rem; }
@@ -54,7 +54,7 @@ body {
     flex: 1;
     margin-bottom: 0; }
   .App .InputForm .actions .wrapper {
-    padding: 2rem 1rem;
+    padding: 1rem 1rem 2rem;
     max-width: 100rem;
     margin: 0 auto; }
   .App section {
@@ -101,8 +101,6 @@ body {
       margin-bottom: 3rem; }
       .App .jumbotron.query h3 {
         color: #EDE9E2; }
-  .App .analysis-tab {
-    max-width: 90%; }
   .App .AnalysisResults {
     text-align: center; }
     .App .AnalysisResults .loader {
@@ -112,14 +110,14 @@ body {
       flex-direction: row;
       justify-content: center;
       align-items: stretch;
-      flex-wrap: wrap; }
+      flex-wrap: wrap;
+      padding: 0 0.5rem; }
     .App .AnalysisResults .analysis-preview {
       color: #050505;
       border-radius: 2px;
       padding: 3rem 2rem;
       margin: .5rem;
-      flex: 0 1 300px;
-      border: 1px solid gray;
+      flex: 0 1 100%;
       text-align: center;
       background-color: #fffeea;
       cursor: pointer;
@@ -131,12 +129,13 @@ body {
         background-color: #ededed;
         cursor: pointer; }
       .App .AnalysisResults .analysis-preview.found {
-        background-color: #6ce86a; }
+        background-color: #6CC04A;
+        color: white; }
       .App .AnalysisResults .analysis-preview.empty {
         opacity: .2;
         cursor: default; }
       .App .AnalysisResults .analysis-preview .name {
-        font-size: 1.2rem;
+        font-size: 1.6rem;
         font-weight: 700; }
       .App .AnalysisResults .analysis-preview .data-results {
         font-size: .9rem; }
@@ -153,28 +152,33 @@ body {
           box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); }
 
 .modal-dialog.analysis-tab {
-  max-width: 90%;
+  width: calc(100% - 0.6rem);
   font-size: 1.1rem;
-  text-align: left; }
+  text-align: left;
+  margin: 0.3rem; }
+  .modal-dialog.analysis-tab .modal-body {
+    padding: 2rem; }
   .modal-dialog.analysis-tab p {
     margin-top: 1rem; }
+  .modal-dialog.analysis-tab .react-json-view {
+    overflow-y: auto;
+    background-color: #fafafa !important; }
 
 @media screen and (min-width: 425px) {
   .AnalysisResults .analysis-preview {
-    max-width: 50%; }
+    flex: 0 1 42.5rem;
+    max-width: 42.5rem; }
   .App h3 {
     text-align: left; }
   .App button {
-    width: 25rem; } }
+    width: 25rem; }
+  .modal-dialog.analysis-tab {
+    max-width: calc(100% - 0.6rem); } }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 768px) {
   .AnalysisResults .analysis-preview {
-    max-width: 33%; } }
-
-@media screen and (min-width: 992px) {
-  .AnalysisResults .analysis-preview {
-    max-width: 25%; } }
-
-@media screen and (min-width: 1200px) {
-  .AnalysisResults .analysis-preview {
-    max-width: 16%; } }
+    flex: 0 1 42.5rem;
+    max-width: 42.5rem; }
+  .modal-dialog.analysis-tab {
+    max-width: 70rem;
+    margin: 0.3rem auto; } }

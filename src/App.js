@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import jump from 'jump.js';
 import { startRun, getOutput } from './lib/api';
 import './App.css';
 
@@ -15,6 +16,7 @@ class App extends Component {
             run: '',
             keystore: '',
             queryingOutput: false,
+            currentOutputLoadedAt: null,
         };
         this.startAnalysis = this.startAnalysis.bind(this)
         this.queryOutput = this.queryOutput.bind(this)
@@ -34,6 +36,7 @@ class App extends Component {
         let response
         try {
             response = await getOutput(keystore);
+            if (!this.state.outputResponse) jump('.results-section', { offset: -60 });
         } catch (error) {
             if (!error.status || error.status !== 404) throw error;
             response = {
@@ -41,7 +44,22 @@ class App extends Component {
                 analysisEnded: false,
             }
         }
-        this.setState({ outputResponse: response });
+        let lastOutputChange = this.state.currentOutputLoadedAt
+        if (JSON.stringify(response) !== JSON.stringify(this.state.outputResponse)) {
+            lastOutputChange = new Date()
+            this.setState({
+                outputResponse: response,
+                currentOutputLoadedAt: lastOutputChange,
+            });
+        } else {
+            const outputChangeDiff = lastOutputChange - new Date()
+            if (outputChangeDiff > 15000) {
+                response.analysisEnded = true;
+                this.setState({
+                    outputResponse: response,
+                });
+            }
+        }
         if (!response.analysisEnded) window.setTimeout(() => this.queryOutput(keystore), 500);
     }
     render() {
@@ -51,7 +69,7 @@ class App extends Component {
                 <section>
                     <InputForm onSubmit={this.startAnalysis}/>
                 </section>
-                <section>
+                <section className="results-section">
                     <AnalysisResults response={this.state.outputResponse}/>
                 </section>
             </div>

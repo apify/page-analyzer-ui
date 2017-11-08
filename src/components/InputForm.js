@@ -5,8 +5,6 @@ import {
     Label,
     Input,
     FormText,
-    Container,
-    Row, Col,
     Button,
     Jumbotron,
     Alert,
@@ -57,7 +55,6 @@ class InputForm extends React.Component {
         const { url, searchFor } = this.state;
         const { onSubmit } = this.props
         const transformedSearchFor = searchFor.filter(item => !!item)
-        let passedValidation = true;
 
         if (!isURL(url)) {
             this.setState({ urlErrorMessage: 'Please provide valid url address.'});
