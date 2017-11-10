@@ -11,6 +11,7 @@ import {
 } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
 import isURL from 'validator/lib/isURL';
+import Tooltip from './Tooltip';
 
 function FieldGroup({ id, label, help, ...props }) {
   return (
@@ -69,13 +70,20 @@ class InputForm extends React.Component {
 
         onSubmit({ url, searchFor: transformedSearchFor });
     }
+
     render() {
         const { url, searchFor, urlErrorMessage } = this.state;
         return (
             <Form className="InputForm">
                 <Jumbotron className="website">
                     <div className="wrapper">
-                        <h3>Website</h3>
+                        <h3>
+                            <Tooltip
+                                title="Our tool analyzes websites and reads structured data from them. Simply enter URL bellow and see what you get"
+                            >
+                                Website
+                            </Tooltip>
+                        </h3>
                         {!!urlErrorMessage && <Alert color="danger">{urlErrorMessage}</Alert>}
                         <FieldGroup
                           id="url"
@@ -89,7 +97,12 @@ class InputForm extends React.Component {
 
                 <Jumbotron className="query">
                     <div className="wrapper">
-                        <h3>Data to look for <small>(optional)</small></h3>
+                        <h3>
+                            <Tooltip title="Are you looking for something in particular? Write it in the form bellow.">
+                                Data to look for
+                            </Tooltip>{' '}
+                            <small>(optional)</small>
+                        </h3>
                         {searchFor.map((item, index) => (
                             <div className="item-row" key={`item_${index}`}>
                                 {searchFor.length > 1 &&

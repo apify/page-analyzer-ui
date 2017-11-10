@@ -5,7 +5,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Graphik", sans-serif;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: auto; }
 
 .App {
   padding-top: 6rem; }
@@ -56,7 +57,8 @@ body {
   .App .InputForm .actions .wrapper {
     padding: 1rem 1rem 2rem;
     max-width: 100rem;
-    margin: 0 auto; }
+    margin: 0 auto;
+    text-align: center; }
   .App section {
     margin-bottom: 2rem; }
   .App label {
@@ -98,7 +100,8 @@ body {
       background-color: #fff; }
     .App .jumbotron.query {
       background-color: #12181D;
-      margin-bottom: 3rem; }
+      margin-bottom: 3rem;
+      text-align: center; }
       .App .jumbotron.query h3 {
         color: #EDE9E2; }
   .App .AnalysisResults {
@@ -150,28 +153,41 @@ body {
           border: 1px solid gray;
           border-radius: 2px;
           box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); }
+  .App .crawler {
+    padding: 2rem; }
+    .App .crawler p {
+      margin-bottom: 2rem; }
+    .App .crawler .react-json-view {
+      text-align: left;
+      max-width: 80rem;
+      margin: auto;
+      font-size: 1.1rem; }
 
 .modal-dialog.analysis-tab {
   width: calc(100% - 0.6rem);
   font-size: 1.1rem;
   text-align: left;
-  margin: 0.3rem; }
+  margin: 0.3rem;
+  -webkit-overflow-scrolling: auto; }
   .modal-dialog.analysis-tab .modal-body {
     padding: 2rem; }
   .modal-dialog.analysis-tab p {
     margin-top: 1rem; }
   .modal-dialog.analysis-tab .react-json-view {
-    overflow-y: auto;
+    overflow: hidden;
     background-color: #fafafa !important; }
+  .modal-dialog.analysis-tab .tooltip {
+    z-index: 10000; }
 
 @media screen and (min-width: 425px) {
   .AnalysisResults .analysis-preview {
     flex: 0 1 42.5rem;
     max-width: 42.5rem; }
   .App h3 {
-    text-align: left; }
+    text-align: center; }
   .App button {
-    width: 25rem; }
+    width: 25rem;
+    margin: 0 auto; }
   .modal-dialog.analysis-tab {
     max-width: calc(100% - 0.6rem); } }
 
@@ -181,4 +197,8 @@ body {
     max-width: 42.5rem; }
   .modal-dialog.analysis-tab {
     max-width: 70rem;
-    margin: 0.3rem auto; } }
+    margin: 0.3rem auto; }
+  .jumbotron .wrapper {
+    padding: 2rem 5rem; }
+  .actions .wrapper {
+    padding: 1rem 5rem 2rem; } }

@@ -2653,6 +2653,18 @@ flux@^3.1.3:
     fbemitter "^2.0.0"
     fbjs "^0.8.0"
 
+focus-trap-react@^3.0.4:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/focus-trap-react/-/focus-trap-react-3.0.5.tgz#8fb381b92eafe075c2406297d1da618650d37143"
+  dependencies:
+    focus-trap "^2.0.1"
+
+focus-trap@^2.0.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-2.3.1.tgz#f4fb86cfe6da38dc652b373e9f42ba476eab1c14"
+  dependencies:
+    tabbable "^1.0.3"
+
 for-in@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -4327,6 +4339,10 @@ no-case@^2.2.0:
   dependencies:
     lower-case "^1.1.1"
 
+no-scroll@^2.0.0, no-scroll@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/no-scroll/-/no-scroll-2.1.0.tgz#f8643b3ddb6a3bf94430e5ff31d26f21d082a695"
+
 node-fetch@^1.0.1:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
@@ -4838,7 +4854,7 @@ pluralize@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
 
-popper.js@^1.12.5:
+popper.js@^1.0.2, popper.js@^1.12.5:
   version "1.12.6"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.6.tgz#91e12a97b07815258b76915d64044e8ac053d426"
 
@@ -5319,6 +5335,14 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-aria-modal@^2.11.1:
+  version "2.11.1"
+  resolved "https://registry.yarnpkg.com/react-aria-modal/-/react-aria-modal-2.11.1.tgz#b82769f369223f634989728694c9eecacb0a8529"
+  dependencies:
+    focus-trap-react "^3.0.4"
+    no-scroll "^2.0.0"
+    react-displace "^2.3.0"
+
 react-base16-styling@^0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/react-base16-styling/-/react-base16-styling-0.5.3.tgz#3858f24e9c4dd8cbd3f702f3f74d581ca2917269"
@@ -5350,6 +5374,10 @@ react-dev-utils@^4.2.1:
     sockjs-client "1.1.4"
     strip-ansi "3.0.1"
     text-table "0.2.0"
+
+react-displace@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-displace/-/react-displace-2.3.0.tgz#6915f8f2f279a29a7b58442405c26edc3d441429"
 
 react-dom@^16.0.0:
   version "16.0.0"
@@ -6314,6 +6342,10 @@ symbol-tree@^3.2.1:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
 
+tabbable@^1.0.3:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-1.1.1.tgz#88618caa0dc76e877572a678f0ad97519bba6761"
+
 table@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/table/-/table-4.0.2.tgz#a33447375391e766ad34d3486e6e2aedc84d2e36"
@@ -6411,6 +6443,12 @@ to-arraybuffer@^1.0.0:
 to-fast-properties@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
+
+tooltip.js@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/tooltip.js/-/tooltip.js-1.1.6.tgz#6ff8b0041ab1d150f0d556616f40a5a4e7f5e936"
+  dependencies:
+    popper.js "^1.0.2"
 
 toposort@^1.0.0:
   version "1.0.6"

@@ -36,7 +36,7 @@ class App extends Component {
         let response
         try {
             response = await getOutput(keystore);
-            if (!this.state.outputResponse) jump('.results-section', { offset: -60 });
+            if (!this.state.outputResponse) jump('.results-section', { offset: -80 });
         } catch (error) {
             if (!error.status || error.status !== 404) throw error;
             response = {
@@ -64,7 +64,7 @@ class App extends Component {
     }
     render() {
         return (
-            <div className="App">
+            <div className="App" id="app">
                 <Header />
                 <section>
                     <InputForm onSubmit={this.startAnalysis}/>

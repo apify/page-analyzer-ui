@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import Tooltip from './Tooltip';
 
-const AnalysisTab = ({ isActive, parsed, data, searchResults, additionalData, clear, heading }) => {
-    if (!parsed) return false
+const AnalysisTab = ({ isActive, tooltip, parsed, data, searchResults, additionalData, clear, heading }) => {
+    if (!parsed) return false;
 
-    const hasData = !!data && data !== {} && data !== []
-    const hasAdditionalData = !!additionalData && additionalData !== {} && additionalData !== []
+    const hasData = !!data && data !== {} && data !== [];
+    const hasAdditionalData = !!additionalData && additionalData !== {} && additionalData !== [];
 
     return (
         <Modal
@@ -17,9 +18,12 @@ const AnalysisTab = ({ isActive, parsed, data, searchResults, additionalData, cl
             className="analysis-tab"
         >
           <ModalHeader toggle={() => clear()}>
-              {heading}
+              {tooltip ? <Tooltip title={tooltip} containerClass="analysis-tab">{heading}</Tooltip> : heading}
           </ModalHeader>
           <ModalBody>
+              {searchResults.length > 0 &&
+                  <p>We found:</p>
+              }
               {searchResults.length > 0 &&
                   <div className="found-results">
                       <ReactJson
@@ -43,7 +47,7 @@ const AnalysisTab = ({ isActive, parsed, data, searchResults, additionalData, cl
                           })}
                       />
                       {hasData &&
-                          <p>in</p>
+                          <p>in:</p>
                       }
                       {hasData &&
                           <ReactJson
@@ -64,7 +68,7 @@ const AnalysisTab = ({ isActive, parsed, data, searchResults, additionalData, cl
                       {hasData &&
                           <ReactJson
                               iconStyle="square"
-                              theme="ashes"
+                              theme="rjv-default"
                               name={null}
                               enableClipboard={false}
                               displayObjectSize={false}
@@ -76,7 +80,7 @@ const AnalysisTab = ({ isActive, parsed, data, searchResults, additionalData, cl
                       {hasAdditionalData &&
                           <ReactJson
                               iconStyle="square"
-                              theme="ashes"
+                              theme="rjv-default"
                               name={null}
                               enableClipboard={false}
                               displayObjectSize={false}

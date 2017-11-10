@@ -7,6 +7,7 @@ body {
     padding: 0;
     font-family: "Graphik", sans-serif;
     box-sizing: border-box;
+    -webkit-overflow-scrolling: auto;
 }
 
 .App {
@@ -80,6 +81,7 @@ body {
                 padding: 1rem 1rem 2rem;
                 max-width: 100rem;
                 margin: 0 auto;
+                text-align: center;
             }
         }
     }
@@ -151,6 +153,8 @@ body {
         &.query {
             background-color: #12181D;
             margin-bottom: 3rem;
+            text-align: center;
+
             h3 {
                 color: #EDE9E2;
             }
@@ -231,6 +235,19 @@ body {
             }
         }
     }
+
+    .crawler {
+        padding: 2rem;
+        p {
+            margin-bottom: 2rem;
+        }
+        .react-json-view {
+            text-align: left;
+            max-width: 80rem;
+            margin: auto;
+            font-size: 1.1rem;
+        }
+    }
 }
 
 .modal-dialog.analysis-tab {
@@ -238,6 +255,7 @@ body {
     font-size: 1.1rem;
     text-align: left;
     margin: 0.3rem;
+    -webkit-overflow-scrolling: auto;
 
     .modal-body {
         padding: 2rem;
@@ -248,8 +266,12 @@ body {
     }
 
     .react-json-view {
-        overflow-y: auto;
+        overflow: hidden;
         background-color: #fafafa!important;
+    }
+
+    .tooltip {
+        z-index: 10000;
     }
 }
 
@@ -261,10 +283,11 @@ body {
 
     .App {
         h3 {
-            text-align: left;
+            text-align: center;
         }
         button {
             width: 25rem;
+            margin: 0 auto;
         }
     }
 
@@ -281,6 +304,12 @@ body {
     .modal-dialog.analysis-tab {
         max-width: 70rem;
         margin: 0.3rem auto;
+    }
+    .jumbotron .wrapper {
+        padding: 2rem 5rem;
+    }
+    .actions .wrapper {
+        padding: 1rem 5rem 2rem;
     }
 }
 
