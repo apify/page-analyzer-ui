@@ -70,7 +70,11 @@ class App extends Component {
                     <InputForm onSubmit={this.startAnalysis}/>
                 </section>
                 <section className="results-section">
-                    <AnalysisResults response={this.state.outputResponse}/>
+                    <AnalysisResults
+                        response={this.state.outputResponse}
+                        searchFor={this.state.searchFor}
+                        url={this.state.url}
+                    />
                 </section>
             </div>
         );

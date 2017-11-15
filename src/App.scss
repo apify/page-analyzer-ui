@@ -248,6 +248,98 @@ body {
             font-size: 1.1rem;
         }
     }
+
+    .search-string-option-header {
+        display: block;
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .search-string-options {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: stretch;
+    }
+    .search-string-option {
+        display: flex;
+        flex: 1 1 50rem;
+        max-width: 50rem;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: stretch;
+        text-align: left;
+        background-color: #eee;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, .1);
+        transition: background-color .3s ease-in-out, color .3s ease-in-out, box-shadow .1s ease-in-out;
+        margin: 0.25rem;
+
+        &.active {
+            background-color: #6CC04A;
+            color: white;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-color: lighten(#6CC04A, 5%);
+            color: white;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, .2);
+        }
+
+        .state {
+            width: 5rem;
+            flex: 0 0 5rem;
+        }
+
+        .info {
+            flex: 1;
+            padding: 0.5rem;
+        }
+
+        .value {
+            font-size: 1.2rem;
+            padding: 0;
+            margin-bottom: 0.2rem;
+        }
+        .path {
+            font-size: 1rem;
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    .search-string-labels-section {
+        .search-string-label-header {
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.25rem;
+        }
+    }
+
+    .crawler-generator {
+        input {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: white;
+            border-radius: 2px;
+            border: 1px solid lightgray;
+            box-shadow: none;
+            color: #111;
+            display: block;
+            font-size: 1.6rem;
+            line-height: 2.2rem;
+            padding: 1.2rem 1.8rem;
+            transition: all .2s ease-in-out;
+            vertical-align: middle;
+            width: 100%;
+            max-width: 50rem;
+            margin: auto;
+            text-align: center;
+        }
+    }
 }
 
 .modal-dialog.analysis-tab {

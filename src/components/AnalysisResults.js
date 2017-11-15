@@ -5,8 +5,9 @@ import ReactJson from 'react-json-view';
 import FontAwesome from 'react-fontawesome';
 import AnalysisPreview from './AnalysisPreview';
 import AnalysisTab from './AnalysisTab';
+import CrawlerWizard from './CrawlerWizard';
 
-const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setShowCrawler }) => {
+const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setShowCrawler, searchFor, url }) => {
     if (!response) {
         return false
     }
@@ -75,6 +76,14 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
         metaDataFound.length +
         htmlFound.length +
         jsonLDDataFound.length;
+
+    const joinedSearchResults = {
+        window: windowPropertiesFound,
+        schemaOrg: schemaOrgDataFound,
+        jsonLD: jsonLDDataFound,
+        metadata: metaDataFound,
+        html: htmlFound,
+    }
 
     return (
         <div className="AnalysisResults">
@@ -249,6 +258,15 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
                             src={crawler}
                         />
                     }
+                </div>
+            }
+            {analysisEnded && totalFoundResults > 0 &&
+                <div className="crawler-wizard">
+                    <CrawlerWizard
+                        searchStrings={searchFor}
+                        searchResults={joinedSearchResults}
+                        url={url}
+                    />
                 </div>
             }
         </div>
