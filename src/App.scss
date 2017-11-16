@@ -248,7 +248,9 @@ body {
             font-size: 1.1rem;
         }
     }
-
+    .search-string-options-section {
+        margin-bottom: 3rem;
+    }
     .search-string-option-header {
         display: block;
         margin-top: 1rem;
@@ -263,39 +265,48 @@ body {
     }
     .search-string-option {
         display: flex;
-        flex: 1 1 50rem;
-        max-width: 50rem;
+        flex: 1 1 48rem;
+        max-width: 48rem;
         flex-direction: row;
         justify-content: flex-start;
         align-items: stretch;
         text-align: left;
-        background-color: #eee;
-        border: 1px solid #ddd;
+        background-color: #C3C6C8;
+        border: 1px solid darken(#C3C6C8, 10%);
         border-radius: 2px;
         box-shadow: 1px 1px 3px rgba(0, 0, 0, .1);
-        transition: background-color .3s ease-in-out, color .3s ease-in-out, box-shadow .1s ease-in-out;
+        transition: background-color .3s ease-in-out, border-color .3s ease-in-out, color .3s ease-in-out, box-shadow .1s ease-in-out;
         margin: 0.25rem;
 
         &.active {
             background-color: #6CC04A;
+            border-color: darken(#6CC04A, 10%);
             color: white;
         }
 
         &:hover {
             cursor: pointer;
             background-color: lighten(#6CC04A, 5%);
+            border-color: darken(#6CC04A, 10%);
             color: white;
             box-shadow: 3px 3px 5px rgba(0, 0, 0, .2);
         }
 
         .state {
-            width: 5rem;
-            flex: 0 0 5rem;
+            width: 4rem;
+            flex: 0 0 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
         }
 
         .info {
             flex: 1;
-            padding: 0.5rem;
+            padding: 0.5rem 0.5rem 0.5rem 0;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
         }
 
         .value {
@@ -311,6 +322,7 @@ body {
     }
 
     .search-string-labels-section {
+        margin-bottom: 3rem;
         .search-string-label-header {
             display: block;
             margin-top: 1rem;
@@ -319,13 +331,23 @@ body {
     }
 
     .crawler-generator {
+        margin-top: 3rem;
+        padding-bottom: 5rem;
+        margin-bottom: 0;
+        background-color: #001F5B;
+        color: white;
+
+        h2 {
+            color: white;
+        }
+
         input {
             -moz-appearance: none;
             -webkit-appearance: none;
             appearance: none;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 2px;
-            border: 1px solid lightgray;
+            border: none;
             box-shadow: none;
             color: #111;
             display: block;
@@ -335,10 +357,41 @@ body {
             transition: all .2s ease-in-out;
             vertical-align: middle;
             width: 100%;
-            max-width: 50rem;
             margin: auto;
             text-align: center;
         }
+
+        .crawler-download {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+            margin: 4rem auto 0;
+            background-color: #6CC04A;
+            border-radius: 2px;
+            transition: background-color .2s ease-in-out;
+            width: 30rem;
+
+            a {
+                display: block;
+                color: white;
+                padding: 1rem;
+                width: 100%;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            &:hover {
+                background-color: lighten(#6CC04A, 5%);
+            }
+            &:active {
+                background-color: darken(#6CC04A, 10%);
+            }
+        }
+    }
+    .results-section {
+        margin-bottom: 0;
     }
 }
 

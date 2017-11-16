@@ -1,11 +1,9 @@
 import React from 'react';
 import { compose, withState } from 'recompose';
-import { Button } from 'reactstrap';
-import ReactJson from 'react-json-view';
 import FontAwesome from 'react-fontawesome';
 import AnalysisPreview from './AnalysisPreview';
 import AnalysisTab from './AnalysisTab';
-import CrawlerWizard from './CrawlerWizard';
+import CrawlerGenerator from './CrawlerGenerator';
 
 const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setShowCrawler, searchFor, url }) => {
     if (!response) {
@@ -37,9 +35,7 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
         xhrRequestsParsed: false,
         xhrRequests: [],
         xhrRequestsFound: [],
-        crawler: '',
         scrappingFinished: null,
-        screenshot: '',
         error: null,
         pageError: null,
     }
@@ -66,9 +62,7 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
         xhrRequestsParsed,
         xhrRequests,
         xhrRequestsFound,
-        crawler,
         analysisEnded,
-        screenshot,
     } = data;
 
     const totalFoundResults = windowPropertiesFound.length +
@@ -230,44 +224,12 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
                     setActiveTab('');
                 }}
             />
-            {!!screenshot &&
-                <div className="screenshot-wrapper">
-                    <h2>Page screenshot</h2>
-                    <img alt="Page screenshot" src={`data:image/png;base64,${screenshot}`} />
-                </div>
-            }
-            {!!crawler && totalFoundResults > 0 &&
-                <div className="crawler">
-                    {!showCrawler
-                        ?
-                        <Button color="primary" onClick={() => setShowCrawler(true)}>
-                            Generate crawler
-                        </Button>
-                        :
-                        <p>Crawler generated: Just save the code bellow to a .json file and then import it in your profile</p>
-                    }
-                    {!!showCrawler &&
-                        <ReactJson
-                            iconStyle="square"
-                            theme="rjv-default"
-                            name={null}
-                            enableClipboard={true}
-                            displayObjectSize={false}
-                            displayDataTypes={false}
-                            collapsed={3}
-                            src={crawler}
-                        />
-                    }
-                </div>
-            }
             {analysisEnded && totalFoundResults > 0 &&
-                <div className="crawler-wizard">
-                    <CrawlerWizard
-                        searchStrings={searchFor}
-                        searchResults={joinedSearchResults}
-                        url={url}
-                    />
-                </div>
+                <CrawlerGenerator
+                    searchStrings={searchFor}
+                    searchResults={joinedSearchResults}
+                    url={url}
+                />
             }
         </div>
     )

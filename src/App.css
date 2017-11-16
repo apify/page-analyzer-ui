@@ -162,6 +162,8 @@ body {
       max-width: 80rem;
       margin: auto;
       font-size: 1.1rem; }
+  .App .search-string-options-section {
+    margin-bottom: 3rem; }
   .App .search-string-option-header {
     display: block;
     margin-top: 1rem;
@@ -173,32 +175,41 @@ body {
     align-items: stretch; }
   .App .search-string-option {
     display: flex;
-    flex: 1 1 50rem;
-    max-width: 50rem;
+    flex: 1 1 48rem;
+    max-width: 48rem;
     flex-direction: row;
     justify-content: flex-start;
     align-items: stretch;
     text-align: left;
-    background-color: #eee;
-    border: 1px solid #ddd;
+    background-color: #C3C6C8;
+    border: 1px solid #a8adb0;
     border-radius: 2px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    transition: background-color .3s ease-in-out, color .3s ease-in-out, box-shadow .1s ease-in-out;
+    transition: background-color .3s ease-in-out, border-color .3s ease-in-out, color .3s ease-in-out, box-shadow .1s ease-in-out;
     margin: 0.25rem; }
     .App .search-string-option.active {
       background-color: #6CC04A;
+      border-color: #559f38;
       color: white; }
     .App .search-string-option:hover {
       cursor: pointer;
       background-color: #7bc75d;
+      border-color: #559f38;
       color: white;
       box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); }
     .App .search-string-option .state {
-      width: 5rem;
-      flex: 0 0 5rem; }
+      width: 4rem;
+      flex: 0 0 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem; }
     .App .search-string-option .info {
       flex: 1;
-      padding: 0.5rem; }
+      padding: 0.5rem 0.5rem 0.5rem 0;
+      display: flex;
+      justify-content: center;
+      flex-direction: column; }
     .App .search-string-option .value {
       font-size: 1.2rem;
       padding: 0;
@@ -207,29 +218,60 @@ body {
       font-size: 1rem;
       padding: 0;
       margin: 0; }
-  .App .search-string-labels-section .search-string-label-header {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 0.25rem; }
-  .App .crawler-generator input {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: white;
-    border-radius: 2px;
-    border: 1px solid lightgray;
-    box-shadow: none;
-    color: #111;
-    display: block;
-    font-size: 1.6rem;
-    line-height: 2.2rem;
-    padding: 1.2rem 1.8rem;
-    transition: all .2s ease-in-out;
-    vertical-align: middle;
-    width: 100%;
-    max-width: 50rem;
-    margin: auto;
-    text-align: center; }
+  .App .search-string-labels-section {
+    margin-bottom: 3rem; }
+    .App .search-string-labels-section .search-string-label-header {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.25rem; }
+  .App .crawler-generator {
+    margin-top: 3rem;
+    padding-bottom: 5rem;
+    margin-bottom: 0;
+    background-color: #001F5B;
+    color: white; }
+    .App .crawler-generator h2 {
+      color: white; }
+    .App .crawler-generator input {
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 2px;
+      border: none;
+      box-shadow: none;
+      color: #111;
+      display: block;
+      font-size: 1.6rem;
+      line-height: 2.2rem;
+      padding: 1.2rem 1.8rem;
+      transition: all .2s ease-in-out;
+      vertical-align: middle;
+      width: 100%;
+      margin: auto;
+      text-align: center; }
+    .App .crawler-generator .crawler-download {
+      font-size: 2rem;
+      font-weight: bold;
+      display: block;
+      margin: 4rem auto 0;
+      background-color: #6CC04A;
+      border-radius: 2px;
+      transition: background-color .2s ease-in-out;
+      width: 30rem; }
+      .App .crawler-generator .crawler-download a {
+        display: block;
+        color: white;
+        padding: 1rem;
+        width: 100%; }
+        .App .crawler-generator .crawler-download a:hover {
+          text-decoration: none; }
+      .App .crawler-generator .crawler-download:hover {
+        background-color: #7bc75d; }
+      .App .crawler-generator .crawler-download:active {
+        background-color: #559f38; }
+  .App .results-section {
+    margin-bottom: 0; }
 
 .modal-dialog.analysis-tab {
   width: calc(100% - 0.6rem);

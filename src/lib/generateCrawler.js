@@ -4,9 +4,9 @@ import jsonLDFieldTemplate from '../templates/jsonLDField';
 import normalize from './normalize';
 
 const METADA_COEFICIENT = 1;
-const SCHEMA_ORG_COEFICIENT = 0.95;
-const JSON_LD_COEFICIENT = 0.95;
-const WINDOW_COEFICIENT = 0.95;
+const WINDOW_COEFICIENT = 0.99;
+const JSON_LD_COEFICIENT = 0.98;
+const SCHEMA_ORG_COEFICIENT = 0.97;
 const HTML_COEFICIENT = 0.8;
 
 const LETTER_COEFICIENT = 0.02;
