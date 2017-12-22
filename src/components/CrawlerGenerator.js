@@ -57,7 +57,7 @@ class CrawlerGenerator extends React.Component {
                 };
             });
         this.setState({
-            name: url.replace(/.*\/\/([^\/]*).*/, '$1'),
+            name: url.replace(/.*\/\/([^/]*).*/, '$1'),
             columns,
             searchResults: filteredSearchResults,
         });
