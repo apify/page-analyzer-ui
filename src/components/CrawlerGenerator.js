@@ -1,8 +1,9 @@
 import React from 'react';
-import { Jumbotron } from 'reactstrap';
-import FontAwesome from 'react-fontawesome';
+import { Jumbotron, UncontrolledDropdown,  DropdownMenu, DropdownToggle } from 'reactstrap';
 import generateCrawler, { getScore } from '../lib/generateCrawler';
 import Tooltip from './Tooltip';
+import SearchStringOption from './SearchStringOption';
+import SearchListDropdown from './SearchListDropdown';
 
 class CrawlerGenerator extends React.Component {
     constructor(props) {
@@ -11,15 +12,17 @@ class CrawlerGenerator extends React.Component {
             columns: [],
             name: '',
             crawler: '',
+            searchStringDropdownOpen: null,
         };
         this.setSelectedOption = this.setSelectedOption.bind(this);
         this.onColumnLabelChange = this.onColumnLabelChange.bind(this);
         this.onNameChange = this.onNameChange.bind(this);
         this.getCrawler = this.getCrawler.bind(this);
         this.regenerateCrawler = this.regenerateCrawler.bind(this);
+        this.toggleDropdown = this.toggleDropdown.bind(this);
     }
     componentWillMount() {
-        const { searchStrings, searchResults } = this.props;
+        const { searchStrings, searchResults, url } = this.props;
         const filteredSearchResults = {}
         searchStrings.forEach(searchString => {
             filteredSearchResults[searchString] = [];
@@ -27,12 +30,13 @@ class CrawlerGenerator extends React.Component {
                 const results = searchResults[type];
                 results.forEach(result => {
                     const score = getScore(searchString, type, result);
-                    if (score > 0) {
+                    if (score > 0 || results.length === 1) {
                         filteredSearchResults[searchString].push({
                             path: result.path || result.selector,
                             value: result.value || result.text,
                             type,
                             score,
+                            foundInLists: result.foundInLists,
                         });
                     }
                 });
@@ -53,6 +57,7 @@ class CrawlerGenerator extends React.Component {
                 };
             });
         this.setState({
+            name: url.replace(/.*\/\/([^\/]*).*/, '$1'),
             columns,
             searchResults: filteredSearchResults,
         });
@@ -61,6 +66,13 @@ class CrawlerGenerator extends React.Component {
         const { columns } = this.state;
         const newColumns = {...columns};
         newColumns[searchString].label =  event.target.value;
+        this.setState({ columns: newColumns });
+        this.regenerateCrawler();
+    }
+    onColumnListChange(searchString, list) {
+        const { columns } = this.state;
+        const newColumns = {...columns};
+        newColumns[searchString].list =  list;
         this.setState({ columns: newColumns });
         this.regenerateCrawler();
     }
@@ -77,6 +89,11 @@ class CrawlerGenerator extends React.Component {
         newColumns[searchString].label = lastSection;
         this.setState({ columns: newColumns });
         this.regenerateCrawler();
+    }
+    toggleDropdown(searchString) {
+        const { searchStringDropdownOpen } = this.state;
+        if (searchStringDropdownOpen === searchString) searchString = null;
+        this.setState({ searchStringDropdownOpen: searchString });
     }
     getCrawler() {
         const { columns, name, searchResults } = this.state;
@@ -109,41 +126,73 @@ class CrawlerGenerator extends React.Component {
                             Generate crawler
                         </Tooltip>
                     </h2>
-                    {Object.keys(searchResults).map(searchString => (
-                        <div className="search-string-options-section" key={`option_section_${searchString}`}>
-                            <strong className="search-string-option-header">Select where to take data from for: {searchString}</strong>
-                            <div className="search-string-options">
-                                {searchResults[searchString].map((item, i) => (
-                                    <div
-                                        className={`search-string-option ${i === columns[searchString].value ? 'active' : ''}`}
-                                        key={`item_${i}`}
-                                        onClick={() => this.setSelectedOption(searchString, i)}
+                    <div className="columns">
+                        <div className="column labels">
+                            <div className="value"/>
+                            <div className="field">Field name</div>
+                            <div className="source">Data source</div>
+                            <div className="list">List</div>
+                        </div>
+                        {Object.keys(searchResults).map((searchString, searchIndex) => (
+                            <div className="column" key={`search_string_${searchString}`}>
+                                <div className="value">{searchString}</div>
+                                <div className="fieldLabel label">Field name</div>
+                                <div className="field">
+                                    <input
+                                        value={columns[searchString] && columns[searchString].label}
+                                        onChange={(event) => this.onColumnLabelChange(searchString, event) }
+                                    />
+                                </div>
+                                <div className="sourceLabel label">Data source</div>
+                                <div className="source">
+                                    <UncontrolledDropdown
+                                        isOpen={this.state.searchStringDropdownOpen === searchString}
+                                        toggle={() => this.toggleDropdown(searchString)}
                                     >
-                                        <div className="state">
-                                            <FontAwesome
-                                                name={i === columns[searchString].value ? 'dot-circle-o' : 'circle-o'}
+                                        <DropdownToggle
+                                          tag="div"
+                                          onClick={this.toggle}
+                                          data-toggle="dropdown"
+                                          aria-expanded={this.state.dropdownOpen}
+                                          className="search-string-selected-option"
+                                        >
+                                            <SearchStringOption
+                                                inMenu={false}
+                                                index={columns[searchString].value}
+                                                selectedIndex={columns[searchString].value}
+                                                list={searchResults[searchString]}
+                                                dropdownOpen={this.state.dropdownOpen}
+                                                setSelectedOption={this.setSelectedOption}
+                                                toggleDropdown={this.toggleDropdown}
                                             />
-                                        </div>
-                                        <div className="info">
-                                            <p className="value">Text: <strong>{item.value.trim()}</strong></p>
-                                            <p className="path">Found in <strong>{item.type}:</strong> {item.path}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                                        </DropdownToggle>
+                                        <DropdownMenu className="search-string-options">
+                                            {searchResults[searchString].map((item, i) => (
+                                                <SearchStringOption
+                                                    key={`item_${i}`}
+                                                    inMenu={true}
+                                                    index={i}
+                                                    selectedIndex={columns[searchString].value}
+                                                    list={searchResults[searchString]}
+                                                    setSelectedOption={this.setSelectedOption}
+                                                    toggleDropdown={this.toggleDropdown}
+                                                    searchString={searchString}
+                                                />
+                                            ))}
+                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                </div>
+                                <div className="listLabel label">List</div>
+                                <div className="list">
+                                    <SearchListDropdown
+                                        item={searchResults[searchString][columns[searchString].value]}
+                                        column={columns[searchString]}
+                                        onColumnListChange={(list) => this.onColumnListChange(searchString, list)}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                    {Object.keys(searchResults).map(searchString => (
-                        <div className="search-string-labels-section" key={`labels_section_${searchString}`}>
-                            <strong className="search-string-label-header">Enter column label for: {searchString}</strong>
-                            <div className="search-string-input">
-                                <input
-                                    value={columns[searchString].label}
-                                    onChange={(event) => this.onColumnLabelChange(searchString, event) }
-                                />
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                     <div className="search-string-name-section">
                         <strong className="search-string-name-header">Enter name for the crawler</strong>
                         <div className="search-string-input">
@@ -154,7 +203,7 @@ class CrawlerGenerator extends React.Component {
                         </div>
                     </div>
                     {!!name && crawler &&
-                        <div class="crawler-download">
+                        <div className="crawler-download">
                             <a href={crawler} target="_blank" download="crawler.json">Download crawler's json</a>
                         </div>
                     }

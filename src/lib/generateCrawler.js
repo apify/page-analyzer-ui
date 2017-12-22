@@ -1,6 +1,9 @@
 import pageFunctionTemplate from '../templates/pageFunction';
 import crawlerTemplate from '../templates/crawler';
 import jsonLDFieldTemplate from '../templates/jsonLDField';
+import jsonLDArrayTemplate from '../templates/jsonLDArrayTemplate';
+import objectArrayTemplate from '../templates/objectArrayTemplate';
+import htmlArrayTemplate from '../templates/htmlArrayTemplate';
 import normalize from './normalize';
 
 const METADA_COEFICIENT = 1;
@@ -50,12 +53,21 @@ const generateCrawler = (url, crawlerName, items, searchResults) => {
         }
         const value = searchResults[searchString][selectedOption.value];
         const label = selectedOption.label;
+        const fromList = selectedOption.list !== '' || typeof selectedOption.list !== 'undefined';
+        let list = null;
+        if (value.foundInLists && fromList) {
+            list = value.foundInLists[selectedOption.list];
+        }
 
         switch (value.type) {
             case 'schemaOrg': {
                 data.requiresJQuery = true;
                 data.requiresSchemaOrg = true;
-                data.crawlerItems.push(`parsedData['${label}'] = schemaOrg${value.path};`);
+                if (list) {
+                    data.crawlerItems.push(objectArrayTemplate('schemaOrg', label, list))
+                } else {
+                    data.crawlerItems.push(`parsedData['${label}'] = schemaOrg${value.path};`);
+                }
                 break;
             }
             case 'metadata': {
@@ -66,16 +78,28 @@ const generateCrawler = (url, crawlerName, items, searchResults) => {
             }
             case 'jsonLD': {
                 data.requiresJQuery = true;
-                data.crawlerItems.push(jsonLDFieldTemplate(label, value.path));
+                if (list) {
+                    data.crawlerItems.push(jsonLDArrayTemplate(label, list))
+                } else {
+                    data.crawlerItems.push(jsonLDFieldTemplate(label, value.path));
+                }
                 break;
             }
             case 'window': {
-                data.crawlerItems.push(`parsedData['${label}'] = window${value.path};`);
+                if (list) {
+                    data.crawlerItems.push(objectArrayTemplate('window.', label, list))
+                } else {
+                    data.crawlerItems.push(`parsedData['${label}'] = window${value.path};`);
+                }
                 break;
             }
             case 'html': {
                 data.requiresJQuery = true;
-                data.crawlerItems.push(`parsedData['${label}'] = $('${value.path}').text();`);
+                if (list) {
+                    data.crawlerItems.push(htmlArrayTemplate(label, list))
+                } else {
+                    data.crawlerItems.push(`parsedData['${label}'] = $('${value.path}').text();`);
+                }
                 break;
             }
             // no default

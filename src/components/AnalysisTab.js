@@ -36,12 +36,14 @@ const AnalysisTab = ({ isActive, tooltip, parsed, data, searchResults, additiona
                           collapsed={2}
                           src={searchResults.map(result => {
                               if (result.path) {
-                                  return {
+                                  const data = {
                                       path: result.path.length && result.path[0] === '.'
                                           ? result.path.substr(1)
                                           : result.path,
-                                      value: result.value
+                                      value: result.value,
                                   }
+                                  if (result.foundInLists) data.foundInLists = result.foundInLists;
+                                  return data;
                               }
                               return result
                           })}
