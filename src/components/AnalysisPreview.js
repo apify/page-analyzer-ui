@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AnalysisPreview = ({ heading, done, foundItems, onClick, data, dataLabel, queryLabel }) => {
+const AnalysisPreview = ({ heading, done, foundItems, onClick, data, dataLabel, queryLabel, showSearchResultsCounter }) => {
 
     let isEmpty = false;
     if (!data) isEmpty = true;
@@ -24,7 +24,9 @@ const AnalysisPreview = ({ heading, done, foundItems, onClick, data, dataLabel, 
             {!!data &&
                 <div className="data-results">{dataLabel} <strong>{dataCount}</strong></div>
             }
-            <div className="found-results">{queryLabel} <strong>{foundItems}</strong></div>
+            {showSearchResultsCounter &&
+                <div className="found-results">{queryLabel} <strong>{foundItems}</strong></div>
+            }
         </div>
     )
 }

@@ -28,7 +28,7 @@ const getTypeCoeficient = (type) => {
 }
 
 export const getScore = (searchString, type, item) => {
-    const value = item.value || item.text;
+    const value = String(item.value || item.text);
     const path = item.path || item.selector;
     const normalizedValue = normalize(value);
     const normalizedSearchString = normalize(searchString);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Jumbotron, UncontrolledDropdown,  DropdownMenu, DropdownToggle } from 'reactstrap';
 import generateCrawler, { getScore } from '../lib/generateCrawler';
-import Tooltip from './Tooltip';
+// import Tooltip from './Tooltip';
 import SearchStringOption from './SearchStringOption';
 import SearchListDropdown from './SearchListDropdown';
 
@@ -9,7 +9,7 @@ class CrawlerGenerator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            columns: [],
+            columns: {},
             name: '',
             crawler: '',
             searchStringDropdownOpen: null,
@@ -62,6 +62,9 @@ class CrawlerGenerator extends React.Component {
             searchResults: filteredSearchResults,
         });
     }
+    componentDidMount() {
+        this.regenerateCrawler();
+    }
     onColumnLabelChange(searchString, event) {
         const { columns } = this.state;
         const newColumns = {...columns};
@@ -87,6 +90,7 @@ class CrawlerGenerator extends React.Component {
         const lastSection = path.split(/[^\w]/).pop();
         newColumns[searchString].value = index;
         newColumns[searchString].label = lastSection;
+        newColumns[searchString].list = '';
         this.setState({ columns: newColumns });
         this.regenerateCrawler();
     }
@@ -115,25 +119,27 @@ class CrawlerGenerator extends React.Component {
     }
     render() {
         const { columns, searchResults, name, crawler } = this.state;
-        if (!columns || columns.length === 0) return false;
+        if (!columns || Object.keys(columns).length === 0) return false;
         return (
             <Jumbotron className="crawler-generator">
                 <div className="wrapper">
                     <h2>
-                        <Tooltip
-                            title="To get your custom crawler choose which items you want in your crawler, set names for columns in the exported data and name for the crawler. And then just download the file."
-                        >
-                            Generate crawler
-                        </Tooltip>
+                        Generate Apify Crawler settings <sup>BETA</sup>
                     </h2>
+                    <p className="description">
+                        But you want to automate this, right?
+                        Click the button below to generate <a href="https://www.apify.com/docs/crawler" target="_blank">Apify Crawler</a> settings
+                        in a JSON file that you can <a href="https://my.apify.com/crawlers?importFromJson=1" target="_blank">import into the Apify app</a> and
+                        start scraping the website at scale. Note that you can customize the names of the attributes as well as their source.
+                    </p>
                     <div className="columns">
                         <div className="column labels">
-                            <div className="value"/>
+                            <div className="value">Text</div>
                             <div className="field">Field name</div>
                             <div className="source">Data source</div>
-                            <div className="list">List</div>
+                            <div className="list">Scope</div>
                         </div>
-                        {Object.keys(searchResults).map((searchString, searchIndex) => (
+                        {Object.keys(searchResults).filter(searchString => !!columns[searchString]).map((searchString, searchIndex) => (
                             <div className="column" key={`search_string_${searchString}`}>
                                 <div className="value">{searchString}</div>
                                 <div className="fieldLabel label">Field name</div>
@@ -202,9 +208,9 @@ class CrawlerGenerator extends React.Component {
                             />
                         </div>
                     </div>
-                    {!!name && crawler &&
+                    {!!name && !!crawler &&
                         <div className="crawler-download">
-                            <a href={crawler} target="_blank" download="crawler.json">Download crawler's json</a>
+                            <a href={crawler} target="_blank" download="crawler.json">Download JSON settings</a>
                         </div>
                     }
                 </div>

@@ -89,6 +89,9 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
             {!!analysisEnded &&
                 <h2>Analysis results</h2>
             }
+            {!!analysisEnded &&
+                <p className="description">Click on the boxes below to see what we know about the page.</p>
+            }
             <div className="previews">
                 <AnalysisPreview
                     heading="Window"
@@ -100,6 +103,7 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
                     onClick={() => {
                         setActiveTab('window');
                     }}
+                    showSearchResultsCounter={searchFor.length > 0}
                 />
                 <AnalysisPreview
                     heading="Schema.org"
@@ -111,6 +115,7 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
                     data={allSchemaOrgData}
                     dataLabel="Top level scopes found: "
                     queryLabel="Search results: "
+                    showSearchResultsCounter={searchFor.length > 0}
                 />
                 <AnalysisPreview
                     heading="Metadata"
@@ -122,6 +127,7 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
                     data={metaData}
                     dataLabel="Metatags found: "
                     queryLabel="Search results: "
+                    showSearchResultsCounter={searchFor.length > 0}
                 />
                 <AnalysisPreview
                     heading="JSON-LD"
@@ -133,6 +139,7 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
                     data={allJsonLDData}
                     dataLabel="JSON-LD tags found: "
                     queryLabel="Search results: "
+                    showSearchResultsCounter={searchFor.length > 0}
                 />
                 <AnalysisPreview
                     heading="XHR"
@@ -144,6 +151,7 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
                     data={xhrRequests}
                     dataLabel="Data XHR requests found: "
                     queryLabel="Search results: "
+                    showSearchResultsCounter={searchFor.length > 0}
                 />
                 <AnalysisPreview
                     heading="HTML"
@@ -154,6 +162,7 @@ const AnalysisResults = ({ response, activeTab, setActiveTab, showCrawler, setSh
                     }}
                     data={null}
                     queryLabel="Selectors found: "
+                    showSearchResultsCounter={searchFor.length > 0}
                 />
             </div>
             <AnalysisTab

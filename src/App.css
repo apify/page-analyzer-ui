@@ -8,374 +8,383 @@ body {
   box-sizing: border-box;
   -webkit-overflow-scrolling: auto; }
 
-.App {
-  padding-top: 6rem; }
-  .App .Header {
-    background-color: #fff;
-    box-shadow: 0 2px 0 0 rgba(159, 164, 168, 0.1);
-    justify-content: flex-start;
-    align-items: bottom;
-    height: 6rem; }
-    .App .Header svg {
-      margin-top: 1rem;
-      height: 100%; }
-    .App .Header h1 {
-      display: inline-block;
-      color: #000;
-      font-size: 2rem;
-      transform: translateY(1rem); }
-  .App .col {
-    margin-bottom: 0; }
-  .App .InputForm input {
-    font-size: 1.6rem;
-    padding: 1.2rem 1.8rem;
-    line-height: 2.2rem;
+.App .Header {
+  background-color: #fff;
+  box-shadow: 0 2px 0 0 rgba(159, 164, 168, 0.1);
+  justify-content: flex-start;
+  align-items: bottom;
+  height: 6rem; }
+  .App .Header svg {
+    margin-top: 1rem;
+    height: 100%; }
+  .App .Header h1 {
+    display: inline-block;
+    color: #000;
+    font-size: 2rem;
+    transform: translateY(1rem); }
+
+.App .col {
+  margin-bottom: 0; }
+
+.App .InputForm input {
+  font-size: 1.6rem;
+  padding: 1.2rem 1.8rem;
+  line-height: 2.2rem;
+  background-color: white;
+  color: #111;
+  border: 1px solid lightgray; }
+
+.App .InputForm .item-row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-bottom: 1rem; }
+
+.App .InputForm .item-row-label {
+  font-size: 1.2rem;
+  text-align: left; }
+
+.App .InputForm .item-row-remove {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 2rem;
+  padding: 1rem;
+  z-index: 2;
+  cursor: pointer; }
+
+.App .InputForm .form-group {
+  flex: 1;
+  margin-bottom: 0; }
+
+.App .InputForm .actions .wrapper {
+  padding: 1rem 1rem 2rem;
+  max-width: 100rem;
+  margin: 0 auto;
+  text-align: center; }
+
+.App section {
+  margin-bottom: 2rem; }
+
+.App label {
+  font-size: 1rem;
+  margin: 0; }
+
+.App button {
+  font-weight: bold;
+  border-radius: 2px;
+  font-size: 1.6rem;
+  padding: 1.2rem 1.8rem;
+  cursor: pointer; }
+  .App button.btn-primary {
+    line-height: 3rem;
+    background: #00A7CE; }
+    .App button.btn-primary:hover:not([disabled]):not(.disabled) {
+      background: #009fc4; }
+    .App button.btn-primary:active:not([disabled]):not(.disabled) {
+      background: #007d9d; }
+  .App button.btn-secondary {
+    line-height: 3rem;
+    background: #C3C6C8; }
+    .App button.btn-secondary:hover:not([disabled]):not(.disabled) {
+      background: #b6b9bc; }
+    .App button.btn-secondary:active:not([disabled]):not(.disabled) {
+      background: #aeb2b4; }
+
+.App .alert {
+  padding: .7rem 1.25rem 0.5rem;
+  font-size: 1rem; }
+
+.App .jumbotron {
+  border-radius: 0;
+  padding: 0; }
+  .App .jumbotron .wrapper {
+    padding: 2rem 1rem;
+    max-width: 100rem;
+    margin: 0 auto; }
+  .App .jumbotron h3 {
+    margin-top: 0; }
+  .App .jumbotron.website {
+    background-color: #fff; }
+  .App .jumbotron.query {
+    background-color: #12181D;
+    margin-bottom: 3rem;
+    text-align: center; }
+    .App .jumbotron.query h3 {
+      color: #EDE9E2; }
+
+.App .AnalysisResults {
+  text-align: center; }
+  .App .AnalysisResults .loader {
+    padding-bottom: 1rem; }
+  .App .AnalysisResults .previews {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    padding: 0 0.5rem; }
+  .App .AnalysisResults .analysis-preview {
+    color: #050505;
+    border-radius: 2px;
+    padding: 3rem 2rem;
+    margin: .5rem;
+    flex: 0 1 100%;
+    text-align: center;
+    background-color: #fffeea;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color .3s ease-in-out, opacity .3s ease-in-out, box-shadow .1s ease-in-out; }
+    .App .AnalysisResults .analysis-preview:hover {
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); }
+    .App .AnalysisResults .analysis-preview.done {
+      background-color: #ededed;
+      cursor: pointer; }
+    .App .AnalysisResults .analysis-preview.found {
+      background-color: #6CC04A;
+      color: white; }
+    .App .AnalysisResults .analysis-preview.empty {
+      opacity: .2;
+      cursor: default; }
+    .App .AnalysisResults .analysis-preview .name {
+      font-size: 1.6rem;
+      font-weight: 700; }
+    .App .AnalysisResults .analysis-preview .data-results {
+      font-size: .9rem; }
+    .App .AnalysisResults .analysis-preview .found-results {
+      margin-top: 1.5rem;
+      font-size: 1.2rem; }
+    .App .AnalysisResults .analysis-preview .screenshot-wrapper {
+      text-align: center;
+      padding-top: 2rem; }
+      .App .AnalysisResults .analysis-preview .screenshot-wrapper img {
+        max-width: 90%;
+        border: 1px solid gray;
+        border-radius: 2px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); }
+
+.App .crawler {
+  padding: 2rem; }
+  .App .crawler p {
+    margin-bottom: 2rem; }
+  .App .crawler .react-json-view {
+    text-align: left;
+    max-width: 80rem;
+    margin: auto;
+    font-size: 1.1rem; }
+
+.App .search-string-options-section {
+  margin-bottom: 3rem; }
+
+.App .search-string-option-header {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem; }
+
+.App .search-string-options {
+  max-height: 30rem;
+  overflow: auto;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+  padding: 0; }
+
+.App .search-string-option {
+  display: flex;
+  flex: 1 1 40rem;
+  max-width: 40rem;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  text-align: left; }
+  .App .search-string-option .state {
+    width: 4rem;
+    flex: 0 0 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem; }
+  .App .search-string-option .info {
+    flex: 1;
+    padding: 0.5rem 0.5rem 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column; }
+  .App .search-string-option .value {
+    font-size: 1rem;
+    padding: 0;
+    margin-bottom: 0.2rem; }
+  .App .search-string-option .path {
+    font-size: 1rem;
+    padding: 0;
+    margin: 0; }
+
+.App .dropdown .search-string-option {
+  background: transparent;
+  border: none;
+  margin: 0;
+  box-shadow: 0;
+  transition: none;
+  padding: 0.25rem;
+  cursor: pointer; }
+
+.App .dropdown-menu .search-string-option {
+  display: flex;
+  flex: 1 1 48rem;
+  max-width: 48rem;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  text-align: left;
+  background-color: transparent;
+  padding: 0.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5); }
+  .App .dropdown-menu .search-string-option:hover {
+    cursor: pointer;
+    background-color: #7bc75d;
+    color: white;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); }
+
+.App .search-string-labels-section {
+  margin-bottom: 3rem; }
+  .App .search-string-labels-section .search-string-label-header {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem; }
+
+.App .crawler-generator {
+  margin-top: 3rem;
+  padding-bottom: 5rem;
+  margin-bottom: 0;
+  background-color: #001F5B;
+  color: white; }
+  .App .crawler-generator h2 {
+    color: white; }
+    .App .crawler-generator h2 small {
+      font-size: 0.5em;
+      font-weight: 300; }
+  .App .crawler-generator table {
+    width: 100%; }
+  .App .crawler-generator input {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
     background-color: white;
+    border-radius: 2px;
+    border: none;
+    box-shadow: none;
     color: #111;
-    border: 1px solid lightgray; }
-  .App .InputForm .item-row {
-    position: relative;
+    display: block;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    padding: 1.2rem 1.8rem;
+    transition: all .2s ease-in-out;
+    vertical-align: middle;
+    width: 100%;
+    margin: auto;
+    text-align: center; }
+  .App .crawler-generator .columns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    margin-bottom: 2rem; }
+  .App .crawler-generator .column {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
-    margin-bottom: 1rem; }
-  .App .InputForm .item-row-label {
-    font-size: 1.2rem;
-    text-align: left; }
-  .App .InputForm .item-row-remove {
-    position: absolute;
-    right: 0;
-    top: 0;
-    font-size: 2rem;
-    padding: 1rem;
-    z-index: 2;
-    cursor: pointer; }
-  .App .InputForm .form-group {
-    flex: 1;
-    margin-bottom: 0; }
-  .App .InputForm .actions .wrapper {
-    padding: 1rem 1rem 2rem;
-    max-width: 100rem;
-    margin: 0 auto;
-    text-align: center; }
-  .App section {
-    margin-bottom: 2rem; }
-  .App label {
-    font-size: 1rem;
-    margin: 0; }
-  .App button {
-    font-weight: bold;
-    border-radius: 2px;
-    font-size: 1.6rem;
-    padding: 1.2rem 1.8rem;
-    cursor: pointer; }
-    .App button.btn-primary {
-      line-height: 3rem;
-      background: #00A7CE; }
-      .App button.btn-primary:hover:not([disabled]):not(.disabled) {
-        background: #009fc4; }
-      .App button.btn-primary:active:not([disabled]):not(.disabled) {
-        background: #007d9d; }
-    .App button.btn-secondary {
-      line-height: 3rem;
-      background: #C3C6C8; }
-      .App button.btn-secondary:hover:not([disabled]):not(.disabled) {
-        background: #b6b9bc; }
-      .App button.btn-secondary:active:not([disabled]):not(.disabled) {
-        background: #aeb2b4; }
-  .App .alert {
-    padding: .7rem 1.25rem 0.5rem;
-    font-size: 1rem; }
-  .App .jumbotron {
-    border-radius: 0;
-    padding: 0; }
-    .App .jumbotron .wrapper {
-      padding: 2rem 1rem;
-      max-width: 100rem;
-      margin: 0 auto; }
-    .App .jumbotron h3 {
-      margin-top: 0; }
-    .App .jumbotron.website {
-      background-color: #fff; }
-    .App .jumbotron.query {
-      background-color: #12181D;
-      margin-bottom: 3rem;
-      text-align: center; }
-      .App .jumbotron.query h3 {
-        color: #EDE9E2; }
-  .App .AnalysisResults {
-    text-align: center; }
-    .App .AnalysisResults .loader {
-      padding-bottom: 1rem; }
-    .App .AnalysisResults .previews {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: stretch;
-      flex-wrap: wrap;
-      padding: 0 0.5rem; }
-    .App .AnalysisResults .analysis-preview {
-      color: #050505;
-      border-radius: 2px;
-      padding: 3rem 2rem;
-      margin: .5rem;
-      flex: 0 1 100%;
-      text-align: center;
-      background-color: #fffeea;
-      cursor: pointer;
-      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-      transition: background-color .3s ease-in-out, opacity .3s ease-in-out, box-shadow .1s ease-in-out; }
-      .App .AnalysisResults .analysis-preview:hover {
-        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); }
-      .App .AnalysisResults .analysis-preview.done {
-        background-color: #ededed;
-        cursor: pointer; }
-      .App .AnalysisResults .analysis-preview.found {
-        background-color: #6CC04A;
-        color: white; }
-      .App .AnalysisResults .analysis-preview.empty {
-        opacity: .2;
-        cursor: default; }
-      .App .AnalysisResults .analysis-preview .name {
-        font-size: 1.6rem;
-        font-weight: 700; }
-      .App .AnalysisResults .analysis-preview .data-results {
-        font-size: .9rem; }
-      .App .AnalysisResults .analysis-preview .found-results {
-        margin-top: 1.5rem;
-        font-size: 1.2rem; }
-      .App .AnalysisResults .analysis-preview .screenshot-wrapper {
-        text-align: center;
-        padding-top: 2rem; }
-        .App .AnalysisResults .analysis-preview .screenshot-wrapper img {
-          max-width: 90%;
-          border: 1px solid gray;
-          border-radius: 2px;
-          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); }
-  .App .crawler {
-    padding: 2rem; }
-    .App .crawler p {
-      margin-bottom: 2rem; }
-    .App .crawler .react-json-view {
-      text-align: left;
-      max-width: 80rem;
-      margin: auto;
-      font-size: 1.1rem; }
-  .App .search-string-options-section {
-    margin-bottom: 3rem; }
-  .App .search-string-option-header {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 0.25rem; }
-  .App .search-string-options {
-    max-height: 30rem;
-    overflow: auto;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
-    padding: 0; }
-  .App .search-string-option {
-    display: flex;
-    flex: 1 1 40rem;
-    max-width: 40rem;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: stretch;
-    text-align: left; }
-    .App .search-string-option .state {
-      width: 4rem;
-      flex: 0 0 4rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.5rem; }
-    .App .search-string-option .info {
-      flex: 1;
-      padding: 0.5rem 0.5rem 0.5rem 0;
-      display: flex;
-      justify-content: center;
-      flex-direction: column; }
-    .App .search-string-option .value {
-      font-size: 1.2rem;
-      padding: 0;
-      margin-bottom: 0.2rem; }
-    .App .search-string-option .path {
-      font-size: 1rem;
-      padding: 0;
-      margin: 0; }
-  .App .dropdown .search-string-option {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 2px;
-    border: none;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    transition: background-color .3s ease-in-out, border-color .3s ease-in-out, color .3s ease-in-out, box-shadow .1s ease-in-out;
-    color: black;
-    padding: 0.25rem; }
-    .App .dropdown .search-string-option:hover {
-      cursor: pointer;
-      background-color: #7bc75d;
-      border-color: #559f38;
-      color: white;
-      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); }
-  .App .dropdown-menu .search-string-option {
-    display: flex;
-    flex: 1 1 48rem;
-    max-width: 48rem;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: stretch;
-    text-align: left;
-    background-color: transparent;
-    padding: 0.25rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5); }
-    .App .dropdown-menu .search-string-option:hover {
-      cursor: pointer;
-      background-color: #7bc75d;
-      color: white;
-      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); }
-  .App .search-string-labels-section {
-    margin-bottom: 3rem; }
-    .App .search-string-labels-section .search-string-label-header {
-      display: block;
-      margin-top: 1rem;
-      margin-bottom: 0.25rem; }
-  .App .crawler-generator {
-    margin-top: 3rem;
-    padding-bottom: 5rem;
-    margin-bottom: 0;
-    background-color: #001F5B;
-    color: white; }
-    .App .crawler-generator h2 {
-      color: white; }
-    .App .crawler-generator table {
-      width: 100%; }
-    .App .crawler-generator input {
-      -moz-appearance: none;
-      -webkit-appearance: none;
-      appearance: none;
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 2px;
-      border: none;
-      box-shadow: none;
-      color: #111;
-      display: block;
-      font-size: 1.6rem;
-      line-height: 2.2rem;
-      padding: 1.2rem 1.8rem;
-      transition: all .2s ease-in-out;
-      vertical-align: middle;
-      width: 100%;
-      margin: auto;
-      text-align: center; }
-    .App .crawler-generator .columns {
+    border-bottom: 1px solid white; }
+    .App .crawler-generator .column.labels {
+      display: none; }
+    .App .crawler-generator .column > div {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: stretch;
-      margin-bottom: 2rem; }
-    .App .crawler-generator .column {
+      padding: 0.25rem;
+      margin-bottom: 1rem;
+      border-radius: 0; }
+    .App .crawler-generator .column > .label {
+      display: block;
+      border-bottom: 1px dotted rgba(255, 255, 255, 0.3); }
+    .App .crawler-generator .column > .value {
+      flex: 0 0 2rem;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      border-bottom: 1px solid white; }
-      .App .crawler-generator .column.labels {
-        display: none; }
-      .App .crawler-generator .column > div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0.25rem;
-        margin-bottom: 1rem; }
-      .App .crawler-generator .column > .label {
-        display: block;
-        border-bottom: 1px dotted rgba(255, 255, 255, 0.3); }
-      .App .crawler-generator .column > .value {
-        flex: 0 0 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-top: 2rem; }
-      .App .crawler-generator .column > .field {
-        padding: 0.25rem; }
-        .App .crawler-generator .column > .field input {
-          display: flex;
-          height: 4rem;
-          width: 100%;
-          margin: 0;
-          padding-top: 0;
-          padding-bottom: 0; }
-      .App .crawler-generator .column > .source {
-        flex: 1; }
-        .App .crawler-generator .column > .source .search-string-selected-option .search-string-option {
-          height: 8rem;
-          padding-left: 1rem; }
-      .App .crawler-generator .column > .list {
-        flex: 1; }
-        .App .crawler-generator .column > .list .toggle {
-          display: flex;
-          height: 8rem;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-          text-align: left;
-          padding: 1rem 0.25rem 1rem 1rem;
-          background-color: rgba(255, 255, 255, 0.9);
-          border-radius: 2px;
-          border: none;
-          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-          transition: background-color .3s ease-in-out, border-color .3s ease-in-out, color .3s ease-in-out, box-shadow .1s ease-in-out;
-          color: black; }
-          .App .crawler-generator .column > .list .toggle:hover {
-            cursor: pointer;
-            background-color: #7bc75d;
-            border-color: #559f38;
-            color: white;
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); }
-          .App .crawler-generator .column > .list .toggle .state {
-            width: 4rem;
-            text-align: center; }
-        .App .crawler-generator .column > .list .dropdown-menu {
-          padding: 0; }
-        .App .crawler-generator .column > .list .dropdown-list-option {
-          padding: 1rem;
-          width: 100%;
-          text-align: left;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-          color: black; }
-          .App .crawler-generator .column > .list .dropdown-list-option:hover {
-            cursor: pointer;
-            background-color: #7bc75d;
-            border-color: #559f38;
-            color: white; }
-        .App .crawler-generator .column > .list .list-option .path {
-          font-size: 1.2rem;
-          margin-bottom: 0.2rem; }
-        .App .crawler-generator .column > .list .list-option .items {
-          font-size: 1rem; }
-    .App .crawler-generator .crawler-download {
-      font-size: 2rem;
+      justify-content: center;
+      font-size: 1.5rem;
       font-weight: bold;
-      display: block;
-      margin: 4rem auto 0;
-      background-color: #6CC04A;
-      border-radius: 2px;
-      transition: background-color .2s ease-in-out;
-      width: 30rem; }
-      .App .crawler-generator .crawler-download a {
-        display: block;
-        color: white;
+      margin-top: 2rem; }
+    .App .crawler-generator .column > .field {
+      padding: 0.25rem; }
+      .App .crawler-generator .column > .field input {
+        outline: 0;
+        font-size: 1.3rem;
+        width: 100%;
+        margin: 0;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem; }
+    .App .crawler-generator .column > .source {
+      flex: 1; }
+      .App .crawler-generator .column > .source .search-string-selected-option .search-string-option {
+        padding-left: 1rem; }
+    .App .crawler-generator .column > .list {
+      flex: 1;
+      font-size: 1.3rem; }
+      .App .crawler-generator .column > .list .toggle {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        padding: 0.8rem 0.25rem 0.8rem 0.8rem;
+        cursor: pointer;
+        border: none; }
+        .App .crawler-generator .column > .list .toggle .state {
+          width: 4rem;
+          text-align: center; }
+      .App .crawler-generator .column > .list .dropdown-menu {
+        padding: 0; }
+      .App .crawler-generator .column > .list .dropdown-list-option {
         padding: 1rem;
-        width: 100%; }
-        .App .crawler-generator .crawler-download a:hover {
-          text-decoration: none; }
-      .App .crawler-generator .crawler-download:hover {
-        background-color: #7bc75d; }
-      .App .crawler-generator .crawler-download:active {
-        background-color: #559f38; }
-  .App .results-section {
-    margin-bottom: 0; }
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        color: black; }
+        .App .crawler-generator .column > .list .dropdown-list-option:hover {
+          cursor: pointer;
+          background-color: #7bc75d;
+          border-color: #559f38;
+          color: white; }
+      .App .crawler-generator .column > .list .list-option .path {
+        font-size: 1rem;
+        margin-bottom: 0.2rem; }
+      .App .crawler-generator .column > .list .list-option .items {
+        font-size: 1rem; }
+  .App .crawler-generator .crawler-download {
+    font-size: 2rem;
+    font-weight: bold;
+    display: block;
+    margin: 4rem auto 0;
+    background-color: #6CC04A;
+    border-radius: 2px;
+    transition: background-color .2s ease-in-out;
+    width: 30rem; }
+    .App .crawler-generator .crawler-download a {
+      display: block;
+      color: white;
+      padding: 1rem;
+      width: 100%; }
+      .App .crawler-generator .crawler-download a:hover {
+        text-decoration: none; }
+    .App .crawler-generator .crawler-download:hover {
+      background-color: #7bc75d; }
+    .App .crawler-generator .crawler-download:active {
+      background-color: #559f38; }
+
+.App .results-section {
+  margin-bottom: 0; }
 
 .modal-dialog.analysis-tab {
   width: calc(100% - 0.6rem);
@@ -426,30 +435,39 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
-    border-bottom: 0; }
+    border-bottom: 0;
+    margin-bottom: 0.1rem; }
     .App .crawler-generator .column.labels {
       display: flex;
       border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
       .App .crawler-generator .column.labels .field {
         color: white; }
       .App .crawler-generator .column.labels > div {
+        background-color: transparent;
         min-height: 0;
-        padding: 0.25rem; }
+        padding: 0.25rem;
+        border-right: 0;
+        color: white;
+        font-weight: bold; }
     .App .crawler-generator .column > div {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 10rem;
-      height: 100%;
-      padding: 0.25rem;
-      margin-bottom: 0; }
+      padding: 0.3rem 0.5rem;
+      margin-bottom: 0;
+      background-color: white;
+      border-right: 1px solid rgba(0, 0, 0, 0.3);
+      color: black;
+      border-radius: 0; }
+      .App .crawler-generator .column > div:first-child {
+        border-top-left-radius: 0.2rem;
+        border-bottom-left-radius: 0.2rem; }
+      .App .crawler-generator .column > div:last-child {
+        border-right: 0;
+        border-top-right-radius: 0.2rem;
+        border-bottom-right-radius: 0.2rem; }
     .App .crawler-generator .column > .label {
       display: none; }
     .App .crawler-generator .column > .value {
-      flex: 0 0 10rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      flex: 1 0 10rem;
+      min-height: 100%;
       font-size: 1rem;
       font-weight: bold;
       margin-top: 0; }
@@ -457,7 +475,6 @@ body {
       padding: 0.25rem; }
       .App .crawler-generator .column > .field input {
         display: flex;
-        height: 8rem;
         width: 100%;
         margin: 0;
         padding-top: 0;
@@ -465,33 +482,9 @@ body {
     .App .crawler-generator .column > .source {
       flex: 0 0 40rem; }
       .App .crawler-generator .column > .source .search-string-selected-option .search-string-option {
-        height: 8rem;
         padding-left: 1rem; }
     .App .crawler-generator .column > .list {
       flex: 0 0 25rem; }
-      .App .crawler-generator .column > .list .toggle {
-        display: flex;
-        height: 8rem;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        text-align: left;
-        padding: 1rem 0.25rem 1rem 1rem;
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 2px;
-        border: none;
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-        transition: background-color .3s ease-in-out, border-color .3s ease-in-out, color .3s ease-in-out, box-shadow .1s ease-in-out;
-        color: black; }
-        .App .crawler-generator .column > .list .toggle:hover {
-          cursor: pointer;
-          background-color: #7bc75d;
-          border-color: #559f38;
-          color: white;
-          box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); }
-        .App .crawler-generator .column > .list .toggle .state {
-          width: 4rem;
-          text-align: center; }
       .App .crawler-generator .column > .list .dropdown-menu {
         padding: 0; }
       .App .crawler-generator .column > .list .dropdown-list-option {
@@ -504,9 +497,4 @@ body {
           cursor: pointer;
           background-color: #7bc75d;
           border-color: #559f38;
-          color: white; }
-      .App .crawler-generator .column > .list .list-option .path {
-        font-size: 1.2rem;
-        margin-bottom: 0.2rem; }
-      .App .crawler-generator .column > .list .list-option .items {
-        font-size: 1rem; } }
+          color: white; } }

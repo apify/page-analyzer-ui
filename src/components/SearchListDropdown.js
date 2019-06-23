@@ -38,7 +38,7 @@ class SearchListDropdown extends React.Component {
         const { dropdownOpen } = this.state;
         const { foundInLists } = item;
         const { list } = column;
-        if (!foundInLists || !foundInLists.length) return null;
+        if (!foundInLists || !foundInLists.length) return 'Just this element';
         const options = [
             { value: '', label: 'Just this element', items: []}
         ]

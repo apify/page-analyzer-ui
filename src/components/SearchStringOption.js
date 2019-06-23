@@ -11,7 +11,7 @@ const SearchStringOption = ({ inMenu, index, selectedIndex, list, searchString, 
         : () => {}
 
     const { type, path, foundInLists } = option;
-    const value = option.value.trim()
+    const value = String(option.value).trim()
     const isInList = foundInLists && foundInLists.length;
     return (
         <div
